@@ -1,943 +1,678 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelHub - Discover Your Next Adventure</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            width: 100%;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 50;
-            top: 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2563eb;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: #333;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .nav-menu a:hover {
-            color: #2563eb;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            margin-top: 60px;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            animation: bounce 1s ease-in-out;
-        }
-
-        .hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 2rem;
-            background: white;
-            color: #2563eb;
-            text-decoration: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-green {
-            background: #22c55e;
-            color: white;
-        }
-
-        .btn-green:hover {
-            background: #16a34a;
-        }
-
-        /* Sections */
-        section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        section h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #1f2937;
-        }
-
-        .bg-gray {
-            background: #f9fafb;
-        }
-
-        /* Destinations */
-        .destinations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .destination-card {
-            background: white;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            animation: slideUp 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        .destination-card:nth-child(1) { animation-delay: 0s; }
-        .destination-card:nth-child(2) { animation-delay: 0.1s; }
-        .destination-card:nth-child(3) { animation-delay: 0.2s; }
-        .destination-card:nth-child(4) { animation-delay: 0.3s; }
-
-        .destination-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .destination-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .destination-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .destination-card-content {
-            padding: 1.5rem;
-        }
-
-        .destination-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .destination-card p {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .price {
-            color: #2563eb;
-            font-weight: bold;
-            font-size: 1.25rem;
-        }
-
-        /* Packages */
-        .packages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .package-card {
-            background: white;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            animation: slideUp 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        .package-card:nth-child(1) { animation-delay: 0s; }
-        .package-card:nth-child(2) { 
-            animation-delay: 0.1s;
-            transform: scale(1.05);
-            border: 2px solid #2563eb;
-        }
-        .package-card:nth-child(3) { animation-delay: 0.2s; }
-
-        .package-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .package-header {
-            background: #2563eb;
-            color: white;
-            padding: 1.5rem;
-        }
-
-        .package-header h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .package-duration {
-            color: #93c5fd;
-            font-size: 0.9rem;
-        }
-
-        .package-content {
-            padding: 2rem;
-        }
-
-        .package-price {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #2563eb;
-            margin-bottom: 1.5rem;
-        }
-
-        .package-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .package-features li {
-            padding: 0.5rem 0;
-            color: #555;
-        }
-
-        .package-features li:before {
-            content: "✓ ";
-            color: #22c55e;
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        /* About Section */
-        .about-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-content h2 {
-            text-align: left;
-        }
-
-        .about-content p {
-            color: #555;
-            margin-bottom: 1rem;
-            line-height: 1.8;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .stat-box {
-            background: #2563eb;
-            color: white;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        .about-image {
-            animation: slideInRight 0.8s ease-out;
-        }
-
-        .about-image img {
-            width: 100%;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            animation: slideUp 0.6s ease-out forwards;
-            opacity: 0;
-        }
-
-        .testimonial-card:nth-child(1) { animation-delay: 0s; }
-        .testimonial-card:nth-child(2) { animation-delay: 0.1s; }
-        .testimonial-card:nth-child(3) { animation-delay: 0.2s; }
-
-        .stars {
-            color: #fbbf24;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-text {
-            color: #555;
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-author {
-            font-weight: bold;
-            color: #1f2937;
-        }
-
-        .testimonial-role {
-            color: #999;
-            font-size: 0.9rem;
-        }
-
-        /* Contact Section */
-        .contact-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .contact-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-        }
-
-        .contact-card:hover {
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-        .contact-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-card h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 0.5rem;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            ring: 2px solid #2563eb;
-            border-color: #2563eb;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        /* Footer */
-        footer {
-            background: #1f2937;
-            color: white;
-            padding: 3rem 2rem;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section a {
-            color: #9ca3af;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #374151;
-            padding-top: 2rem;
-            text-align: center;
-            color: #9ca3af;
-        }
-
-        /* Floating WhatsApp Button */
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            width: 60px;
-            height: 60px;
-            background: #22c55e;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s;
-            z-index: 40;
-            animation: bounce 2s infinite;
-        }
-
-        .whatsapp-btn:hover {
-            background: #16a34a;
-            transform: scale(1.1);
-        }
-
-        .whatsapp-btn svg {
-            width: 30px;
-            height: 30px;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                gap: 0;
-                border-top: 1px solid #ddd;
-            }
-
-            .nav-menu.active {
-                display: flex;
-            }
-
-            .nav-menu a {
-                padding: 1rem;
-                border-bottom: 1px solid #eee;
-            }
-
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .hero-content p {
-                font-size: 1rem;
-            }
-
-            section {
-                padding: 3rem 1rem;
-            }
-
-            section h2 {
-                font-size: 1.75rem;
-            }
-
-            .about-container {
-                grid-template-columns: 1fr;
-            }
-
-            .about-content h2 {
-                text-align: center;
-            }
-
-            .destinations-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .packages-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .package-card:nth-child(2) {
-                transform: scale(1);
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .whatsapp-btn {
-                bottom: 1rem;
-                right: 1rem;
-                width: 50px;
-                height: 50px;
-            }
-
-            .whatsapp-btn svg {
-                width: 25px;
-                height: 25px;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tourism — Demo</title>
+
+  <!-- Font Awesome + Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+  /* ---------------- Reset & base ---------------- */
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:'Lato',sans-serif;color:#111;background:#fff;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1100px;margin:0 auto;padding:0 16px}
+
+  /* ---------------- Header / Hero ---------------- */
+  header{
+    height:720px;
+    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=5ebfae5f7f3f0b6f1f4a6b4b7f0cd2e7');
+    background-size:cover;background-position:center;background-attachment:fixed;position:relative;overflow:hidden;
+  }
+  header::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.45));pointer-events:none}
+  .navBar{display:flex;align-items:center;justify-content:space-between;padding:18px 16px;position:relative;z-index:5}
+  .logo{color:#fff;font-weight:800;font-size:1.4rem}
+  .navBar ul{display:flex;gap:18px;list-style:none;align-items:center}
+  .navBar a{color:#fff;font-weight:600;transition:color .25s}
+  .navBar a:hover{color:#F8C308}
+  .nav-toggle{display:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:8px;border-radius:8px;color:#fff;cursor:pointer}
+
+  .header-section{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);text-align:center;z-index:4}
+  .header-section h1{color:#fff;font-size:3rem;margin-bottom:8px;letter-spacing:.2px}
+  .header-section h2{color:#fff;font-size:1.05rem;font-weight:300;opacity:.95}
+
+  /* ---------------- Travel box ---------------- */
+  .travel-box{position:absolute;left:50%;top:78%;transform:translate(-50%,-50%);width:94%;max-width:1100px;padding:16px;border-radius:14px;background:rgba(255,255,255,.95);box-shadow:0 18px 40px rgba(14,30,37,.12);z-index:6}
+  .travel-plans{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .trips-p p{font-weight:700;font-size:16px;margin-bottom:6px}
+  .loc-box,.date-box{display:flex;gap:10px;align-items:center;padding:8px 12px;border-radius:10px;background:#EDEDED;min-width:200px;transition:transform .2s}
+  .loc-box:hover,.date-box:hover{transform:translateY(-2px)}
+  select,input[type="date"]{padding:8px;border-radius:8px;border:none;background:transparent;outline:none;font-size:1rem;color:#333}
+  .btn{background:#F8C308;border:none;padding:10px 18px;border-radius:10px;cursor:pointer;font-weight:800;transition:background .2s}
+  .btn:hover{background:#e0b107}
+  .search{margin-left:auto}
+  .loc-select{display:flex;gap:8px;align-items:center}
+
+  /* ---------------- main ---------------- */
+  main{padding:40px 0 80px;background:#fff}
+  .section-title{font-size:1.6rem;margin-bottom:12px;color:#111}
+  .info-banner{display:none;max-width:1100px;margin:16px auto;padding:12px;border-radius:8px;background:#EEF9F1;color:#0A6D2A;text-align:center;font-weight:700}
+
+  .tours-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+
+  .tour-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 24px rgba(20,30,40,.06);transition:transform .45s,box-shadow .45s;cursor:pointer;position:relative}
+  .tour-card img{width:100%;height:180px;object-fit:cover;display:block;transition:transform .6s,filter .6s}
+  .tour-card:hover img{transform:scale(1.06) rotate(.8deg);filter:brightness(1.05)}
+  .tour-card .card-body{padding:12px}
+  .tour-card h3{font-size:1.05rem;margin-bottom:6px}
+  .tour-card p{font-size:.92rem;color:#444}
+  .tour-card::after{content:"";position:absolute;left:14px;top:14px;width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));backdrop-filter: blur(2px);box-shadow:0 6px 18px rgba(0,0,0,.08);opacity:0;transition:opacity .25s}
+  .tour-card:hover::after{opacity:1}
+
+  /* highlight */
+  .tour-card.highlight{outline:3px solid #F8C308;box-shadow:0 18px 36px rgba(248,195,8,.12)}
+
+  /* ---------------- modal (generic) ---------------- */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:1200}
+  .modal{width:92%;max-width:920px;background:#fff;border-radius:12px;padding:18px;box-shadow:0 18px 40px rgba(0,0,0,.22);animation:slideIn .36s ease}
+  @keyframes slideIn{from{transform:translateY(-30px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+  .city-top{display:flex;gap:18px;flex-wrap:wrap}
+  .city-main-img{flex:0 0 420px;border-radius:10px;overflow:hidden;transition:transform .3s}
+  .city-main-img img{width:100%;height:300px;object-fit:cover;display:block;transition:transform .5s}
+  .city-main-img:hover img{transform:scale(1.02) rotate(-1deg)}
+
+  .city-info{flex:1;min-width:260px}
+  .plans{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
+  .plan{background:#fff;padding:12px;border-radius:10px;box-shadow:0 8px 18px rgba(0,0,0,.06);transition:transform .3s}
+  .plan:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(0,0,0,.12)}
+  .plan h4{font-size:1rem;margin-bottom:8px}
+  .plan .price{font-weight:800;margin-top:8px;color:#D35400}
+  .btn-book{margin-top:10px;background:#25D366;color:#fff;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700}
+
+  /* ---------------- city list / picker ---------------- */
+  .city-list{max-height:320px;overflow:auto;margin-top:12px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .city-item{padding:10px;border-radius:8px;background:#f4f4f4;cursor:pointer;font-weight:700;display:flex;align-items:center;gap:10px;transition:background .2s}
+  .city-item:hover{background:#F8C308;color:#111}
+
+  /* ---------------- contacts ---------------- */
+  .contacts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
+  .contact-card{background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.06);transition:transform .2s}
+  .contact-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(0,0,0,.12)}
+  .contact-card h4{margin-bottom:6px}
+  .contact-card .phone{font-weight:800;color:#0a6d2a;margin-bottom:8px}
+
+  /* ---------------- gallery & images ---------------- */
+  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:14px}
+  .gallery-grid img{width:100%;height:150px;object-fit:cover;border-radius:8px;cursor:pointer;transition:transform .4s,box-shadow .4s}
+  .gallery-grid img:hover{transform:scale(1.07) rotate(.6deg);box-shadow:0 12px 32px rgba(0,0,0,.2)}
+
+  /* ---------------- footer & map ---------------- */
+  footer{background:#151515;color:#ddd;padding:26px 16px;margin-top:34px}
+  .footer-group{display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}
+  .footer-icons{display:flex;gap:12px;margin-top:8px}
+  .footer-icons a{color:#ddd;font-size:1.2rem;transition:color .2s}
+  .footer-icons a:hover{color:#F8C308}
+
+  .map-card{background:#0f1720;color:#fff;border-radius:10px;padding:12px;min-width:260px}
+  .map-canvas{position:relative;height:200px;border-radius:8px;overflow:hidden;background:#0a1220;display:flex;align-items:center;justify-content:center}
+  .map-marker{position:absolute;width:16px;height:16px;background:#FF4B4B;border-radius:50%;transform:translate(-50%,-100%);left:58%;top:52%;box-shadow:0 6px 18px rgba(255,75,75,.22)}
+  .map-marker::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:rgba(255,75,75,.12);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%{transform:translate(-50%,-50%) scale(.6);opacity:.9}50%{transform:translate(-50%,-50%) scale(1);opacity:.25}100%{transform:translate(-50%,-50%) scale(.6);opacity:.9}}
+
+  .path-anim path{stroke-dasharray:6 6;stroke:#FFD166;stroke-width:2;fill:none;animation:move 2.4s linear infinite}
+  @keyframes move{from{stroke-dashoffset:0}to{stroke-dashoffset:12}}
+
+  .fab-whatsapp{position:fixed;right:18px;bottom:20px;background:#25D366;color:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:9999;box-shadow:0 12px 30px rgba(0,0,0,.22);cursor:pointer;transition:transform .2s}
+  .fab-whatsapp:hover{transform:scale(1.08)}
+
+  /* responsive */
+  @media(max-width:900px){
+    .header-section h1{font-size:2.2rem}
+    .travel-box{top:82%}
+    .city-main-img{flex-basis:100%}
+    .city-info{flex-basis:100%}
+    .navBar ul{display:none}
+    .nav-toggle{display:block}
+    .city-list{grid-template-columns:repeat(1,1fr)}
+  }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">🌍 TravelHub</div>
-            <button class="menu-toggle" id="menuToggle">☰</button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a onclick="scrollToSection('home')">Home</a></li>
-                <li><a onclick="scrollToSection('destinations')">Destinations</a></li>
-                <li><a onclick="scrollToSection('packages')">Packages</a></li>
-                <li><a onclick="scrollToSection('about')">About</a></li>
-                <li><a onclick="scrollToSection('contact')">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Discover Your Next Adventure</h1>
-            <p>Explore the world's most beautiful destinations with us</p>
-            <button class="btn" onclick="scrollToSection('packages')">Explore Packages</button>
-        </div>
-    </section>
+  <!-- HEADER -->
+  <header>
+    <div class="container navBar" role="navigation" aria-label="Main navigation">
+      <a class="logo" href="#">Tourism</a>
 
-    <!-- Destinations Section -->
-    <section id="destinations" class="bg-gray">
-        <h2>Popular Destinations</h2>
-        <div class="destinations-grid">
-            <div class="destination-card">
-                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=400&fit=crop" alt="Mountain Paradise">
-                <div class="destination-card-content">
-                    <h3>Mountain Paradise</h3>
-                    <p>Experience breathtaking mountain views and adventure activities</p>
-                    <div class="price">$299</div>
-                </div>
-            </div>
-            <div class="destination-card">
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&h=400&fit=crop" alt="Beach Retreat">
-                <div class="destination-card-content">
-                    <h3>Beach Retreat</h3>
-                    <p>Relax on pristine beaches with crystal clear waters</p>
-                    <div class="price">$249</div>
-                </div>
-            </div>
-            <div class="destination-card">
-                <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=500&h=400&fit=crop" alt="Jungle Explorer">
-                <div class="destination-card-content">
-                    <h3>Jungle Explorer</h3>
-                    <p>Discover exotic wildlife and lush tropical forests</p>
-                    <div class="price">$349</div>
-                </div>
-            </div>
-            <div class="destination-card">
-                <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=500&h=400&fit=crop" alt="City Adventure">
-                <div class="destination-card-content">
-                    <h3>City Adventure</h3>
-                    <p>Explore vibrant cities with rich culture and history</p>
-                    <div class="price">$199</div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <ul>
+        <li><a href="#" id="contactLocalLink">Contact a local</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <button class="nav-toggle" id="openNav" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
 
-    <!-- Packages Section -->
-    <section id="packages">
-        <h2>Tour Packages</h2>
-        <div class="packages-grid">
-            <div class="package-card">
-                <div class="package-header">
-                    <h3>Weekend Getaway</h3>
-                    <div class="package-duration">3 Days / 2 Nights</div>
-                </div>
-                <div class="package-content">
-                    <div class="package-price">$399</div>
-                    <ul class="package-features">
-                        <li>Hotel accommodation</li>
-                        <li>Daily breakfast</li>
-                        <li>Guided tours</li>
-                        <li>Airport transfer</li>
-                    </ul>
-                    <button class="btn btn-green" onclick="openWhatsApp('Weekend Getaway - 3 Days / 2 Nights - $399')">Book via WhatsApp</button>
-                </div>
-            </div>
-            <div class="package-card">
-                <div class="package-header">
-                    <h3>Adventure Package</h3>
-                    <div class="package-duration">5 Days / 4 Nights</div>
-                </div>
-                <div class="package-content">
-                    <div class="package-price">$699</div>
-                    <ul class="package-features">
-                        <li>Premium hotel</li>
-                        <li>All meals included</li>
-                        <li>Adventure activities</li>
-                        <li>Travel insurance</li>
-                    </ul>
-                    <button class="btn btn-green" onclick="openWhatsApp('Adventure Package - 5 Days / 4 Nights - $699')">Book via WhatsApp</button>
-                </div>
-            </div>
-            <div class="package-card">
-                <div class="package-header">
-                    <h3>Luxury Experience</h3>
-                    <div class="package-duration">7 Days / 6 Nights</div>
-                </div>
-                <div class="package-content">
-                    <div class="package-price">$1299</div>
-                    <ul class="package-features">
-                        <li>5-star resort</li>
-                        <li>Gourmet dining</li>
-                        <li>Spa services</li>
-                        <li>Personal guide</li>
-                        <li>VIP treatment</li>
-                    </ul>
-                    <button class="btn btn-green" onclick="openWhatsApp('Luxury Experience - 7 Days / 6 Nights - $1299')">Book via WhatsApp</button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="header-section">
+      <h1>Welcome to TOUR</h1>
+      <h2>A platform for travel information and services</h2>
+    </div>
 
-    <!-- About Section -->
-    <section id="about" class="bg-gray">
-        <div class="about-container">
-            <div class="about-content">
-                <h2>About TravelHub</h2>
-                <p>With over 15 years of experience in the travel industry, TravelHub has been helping thousands of travelers discover the world's most beautiful destinations.</p>
-                <p>Our team of expert travel consultants is dedicated to creating unforgettable experiences tailored to your preferences and budget.</p>
-                <div class="stats">
-                    <div class="stat-box">
-                        <div class="stat-number">50K+</div>
-                        <div class="stat-label">Happy Travelers</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">100+</div>
-                        <div class="stat-label">Destinations</div>
-                    </div>
-                </div>
-            </div>
-            <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=500&h=500&fit=crop" alt="About TravelHub">
-            </div>
-        </div>
-    </section>
+    <!-- Travel box -->
+    <div class="travel-box container" role="search" aria-label="Trip search">
+      <div class="trips-p"><p>Trips</p></div>
 
-    <!-- Testimonials Section -->
+      <div class="travel-plans" aria-hidden="false">
+        <div>
+          <p>Starting Location</p>
+          <div class="loc-box">
+            <i class="fa-solid fa-location-dot"></i>
+            <div class="loc-select">
+              <select id="startLocationSelect" aria-label="Select starting city">
+                <option value="mumbai">Mumbai</option>
+                <option value="delhi">Delhi</option>
+                <option value="bengaluru">Bengaluru</option>
+                <option value="hyderabad">Hyderabad</option>
+                <option value="chennai">Chennai</option>
+                <option value="pune">Pune</option>
+                <option value="kolkata">Kolkata</option>
+                <option value="jaipur">Jaipur</option>
+                <option value="ahmedabad">Ahmedabad</option>
+                <option value="goa">Goa</option>
+              </select>
+            </div>
+            <i class="fa-solid fa-xmark" id="clear-location" style="cursor:pointer;margin-left:8px" title="Clear"></i>
+          </div>
+        </div>
+
+        <div>
+          <p>Select Dates</p>
+          <div class="date-box">
+            <i class="fa-solid fa-calendar"></i>
+            <input id="arrivalDate" type="date" aria-label="Arrival date">
+            <input id="departureDate" type="date" aria-label="Departure date">
+          </div>
+        </div>
+
+        <div>
+          <p>Travelers</p>
+          <div class="select">
+            <select id="travelers" aria-label="Number of travelers">
+              <option disabled selected>Choose travelers</option>
+              <option>1</option><option>2</option><option>3</option><option>4</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="search">
+          <button class="btn" id="searchBtn" title="Search">Search</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- City picker modal -->
+  <div class="modal-backdrop" id="cityModal" aria-hidden="true">
+    <div class="modal" role="document" aria-labelledby="cityModalTitle">
+      <div style="display:flex;align-items:center;gap:10px">
+        <h3 id="cityModalTitle">Choose a city</h3>
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+          <input id="citySearchInput" placeholder="Search city..." style="padding:8px;border-radius:8px;border:1px solid #eee" />
+          <button id="closeCityModal" style="background:transparent;border:none;cursor:pointer"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+      <div class="city-list" id="cityList" tabindex="0"></div>
+    </div>
+  </div>
+
+  <!-- Contact a local modal -->
+  <div class="modal-backdrop" id="contactsModal" aria-hidden="true">
+    <div class="modal" role="document" aria-labelledby="contactsTitle">
+      <div style="display:flex;align-items:center;gap:10px">
+        <h3 id="contactsTitle">Contact a local</h3>
+        <button id="closeContacts" style="margin-left:auto;border:none;background:transparent;cursor:pointer"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <p style="margin-top:8px;color:#666">Tap a local to start a WhatsApp chat with them.</p>
+      <div class="contacts-grid" id="contactsGrid"></div>
+    </div>
+  </div>
+
+  <!-- City details modal -->
+  <div class="modal-backdrop" id="cityDetailsModal" aria-hidden="true">
+    <div class="modal" role="document" aria-labelledby="cityTitleModal">
+      <div style="display:flex;align-items:center;gap:10px">
+        <h3 id="cityTitleModal"></h3>
+        <button id="closeCityDetails" style="margin-left:auto;border:none;background:transparent;cursor:pointer"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="city-top" id="cityTopInner" style="margin-top:12px">
+        <div class="city-main-img" id="cityMainImgModal"></div>
+        <div class="city-info" id="cityInfoModal"></div>
+      </div>
+      <div style="margin-top:12px">
+        <strong>Photos</strong>
+        <div class="gallery-grid" id="cityGalleryModal"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info banner -->
+  <div class="info-banner" id="infoBanner"></div>
+
+  <!-- MAIN -->
+  <main class="container" id="mainContent">
     <section>
-        <h2>What Our Clients Say</h2>
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p class="testimonial-text">"Amazing experience! The team was professional and the itinerary was perfect."</p>
-                <p class="testimonial-author">Sarah Johnson</p>
-                <p class="testimonial-role">Traveler</p>
-            </div>
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p class="testimonial-text">"Best vacation ever! Every detail was taken care of. Highly recommended!"</p>
-                <p class="testimonial-author">Mike Chen</p>
-                <p class="testimonial-role">Adventure Seeker</p>
-            </div>
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p class="testimonial-text">"Perfect for families! Safe, fun, and memorable moments for everyone."</p>
-                <p class="testimonial-author">Emma Davis</p>
-                <p class="testimonial-role">Family Trip</p>
-            </div>
-        </div>
+      <h2 class="section-title">Popular India Destinations</h2>
+      <div id="toursGrid" class="tours-grid" role="list"></div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="bg-gray">
-        <h2>Get In Touch</h2>
-        <div class="contact-methods">
-            <div class="contact-card">
-                <div class="contact-icon">📞</div>
-                <h3>Call Us</h3>
-                <p>9529730330</p>
-            </div>
-            <div class="contact-card">
-                <div class="contact-icon">✉️</div>
-                <h3>Email Us</h3>
-                <p>info@travelhub.com</p>
-            </div>
-            <div class="contact-card">
-                <div class="contact-icon">💬</div>
-                <h3>WhatsApp</h3>
-                <p>Chat with us anytime</p>
-            </div>
-        </div>
-
-        <div class="contact-form">
-            <form onsubmit="handleContactForm(event)">
-                <div class="form-group">
-                    <input type="text" id="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-green" style="width: 100%;">Send via WhatsApp</button>
-            </form>
-        </div>
+    <!-- Gallery -->
+    <section id="gallery" style="margin-top:34px">
+      <h2 class="section-title">Family Trip Gallery</h2>
+      <div class="gallery-grid" id="mainGallery">
+        <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1c6c0ee3d0f8ad6b0e0f8b2a21f8e6ef" alt="family1" class="gItem">
+        <img src="https://images.unsplash.com/photo-1519817650390-64a93db511aa?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=7f5b2a2b6a0e0f3b5cbc9d5eea3d5a3f" alt="family2" class="gItem">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=a9b79d0c2f9fb9f1f9d1e8b7c8c2d3b1" alt="family3" class="gItem">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=2d1a9a3c6b4c7b0e9ad5b1f6bcf16b7d" alt="family4" class="gItem">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f69f6a5a9c3c7b6c6a4f4d6b2a1f708" alt="family5" class="gItem">
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>🌍 TravelHub</h3>
-                    <p>Your trusted travel companion for unforgettable adventures.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a onclick="scrollToSection('home')">Home</a></li>
-                        <li><a onclick="scrollToSection('destinations')">Destinations</a></li>
-                        <li><a onclick="scrollToSection('packages')">Packages</a></li>
-                        <li><a onclick="scrollToSection('about')">About</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact</h3>
-                    <ul>
-                        <li>Phone: 9529730330/li>
-                        <li>Email: info@travelhub.com</li>
-                        <li>Address: 123 Travel St, City</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Follow Us</h3>
-                    <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Twitter</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 TravelHub. All rights reserved.</p>
-            </div>
+    <!-- About -->
+    <section id="about" style="margin-top:40px">
+      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+        <div style="flex:1;min-width:260px">
+          <h2>About Kesari-style Tours</h2>
+          <p>Inspired by premium tour operators, our agency focuses on curated, reliable travel experiences across India and internationally. We combine vetted hotels, experienced local guides, comfortable transfers and flexible itineraries to make every trip memorable for families, couples and groups.</p>
         </div>
-    </footer>
+        <div style="flex:0 0 420px">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f69f6a5a9c3c7b6c6a4f4d6b2a1f708" style="width:100%;border-radius:10px" alt="About">
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/9529730330?text=Hi%20TravelHub!%20I%20would%20like%20to%20know%20more%20about%20your%20services." target="_blank" class="whatsapp-btn" title="Chat with us on WhatsApp">
-        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.946 1.347l-.355.192-.368-.06a9.864 9.864 0 00-3.955-.192c.503 5.277 4.614 9.456 9.922 9.456a9.865 9.865 0 005.93-1.975l.24-.144.371.036a9.964 9.964 0 003.211.323c-.666-2.433-2.494-4.542-4.8-5.48l-.214-.128.007-.282a9.5 9.5 0 00-.68-3.776 10.023 10.023 0 00-8.523-5.487z"/>
-        </svg>
-    </a>
+  <!-- FOOTER -->
+  <footer id="contact" aria-label="Footer">
+    <div class="container footer-group">
+      <div>
+        <h4 style="color:#fff;margin-bottom:8px">Contacts</h4>
+        <p style="color:#ddd">Email: example@gmail.com</p>
+        <p style="color:#ddd">Phone: +91 95297 30330</p>
+        <div class="footer-icons">
+          <a href="mailto:example@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+          <a href="tel:+919529730330" title="Call"><i class="fa-solid fa-phone"></i></a>
+          <a href="https://wa.me/919529730330?text=Welcome%20to%20our%20Tourism%20Website!%20How%20can%20I%20help%20you?" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
 
-    <script>
-        // Mobile Menu Toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
+      <div class="map-card" aria-hidden="false">
+        <h4 style="margin-bottom:8px">Map — Pimple Saudagar</h4>
+        <div class="map-canvas" role="img" aria-label="Map showing Pimple Saudagar location">
+          <svg viewBox="0 0 400 220" style="width:100%;height:100%;display:block">
+            <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#FFD166"/><stop offset="1" stop-color="#FB7B6C"/></linearGradient></defs>
+            <g class="path-anim" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M40 170 C90 120 150 110 200 90 C260 70 320 70 360 40" stroke="url(#g)" stroke-width="3" fill="none" />
+            </g>
+          </svg>
+          <div class="map-marker" title="Pimple Saudagar"></div>
+        </div>
+        <p style="margin-top:8px;color:#ddd">Pimple Saudagar — Pune suburb. Click <a href="https://www.google.com/maps/dir//Pimple+Saudagar" target="_blank" style="color:#FFD166">Get directions</a></p>
+      </div>
+    </div>
+  </footer>
 
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+  <!-- Floating WhatsApp (main) -->
+  <a id="fabWhatsApp" class="fab-whatsapp" href="https://wa.me/919529730330?text=Welcome%20to%20our%20Tourism%20Website!%20How%20can%20I%20help%20you?" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp" style="font-size:20px"></i>
+  </a>
+
+  <!-- Lightbox modal -->
+  <div id="lightbox" class="modal-backdrop" style="display:none;align-items:center;justify-content:center;z-index:1400">
+    <div class="modal" style="background:transparent;box-shadow:none;padding:0;max-width:95%">
+      <img id="lightboxImg" src="" alt="Expanded" style="width:100%;border-radius:8px;display:block">
+    </div>
+  </div>
+
+  <!-- ---------------- SCRIPTS (DATA + BEHAVIOR) ---------------- -->
+  <script>
+  (function(){
+    // ========== Dummy city data (10 cities). Images use Unsplash/postimg/picsum for quality.
+    const citiesData = {
+      mumbai: {
+        key:'mumbai', name:"Mumbai",
+        desc:"Financial & entertainment capital — Marine Drive, Gateway of India, Victorian architecture, vibrant street food.",
+        mainImg:"https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1a3b1b88c1f6a5b0e2b9a4b2f7e2c7d1",
+        gallery:[
+          "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1a3b1b88c1f6a5b0e2b9a4b2f7e2c7d1",
+          "https://images.unsplash.com/photo-1505691723518-36a7b2b2f7b0?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c"
+        ],
+        plans:[
+          {id:1,title:"Mumbai Darshan — 2D/1N",price:"₹4,999",details:"City highlights + Gateway + optional ferry"},
+          {id:2,title:"Mumbai Family — 3D/2N",price:"₹8,999",details:"City + cultural food walk"}
+        ],
+        locals:[
+          {name:"Ravi (Mumbai)",phone:"9529730331"},
+          {name:"Asha (Mumbai)",phone:"9529730332"}
+        ]
+      },
+      delhi: {
+        key:'delhi', name:"Delhi",
+        desc:"Capital city with rich history — Red Fort, Qutub Minar, bustling bazaars and fine dining.",
+        mainImg:"https://images.unsplash.com/photo-1508057198894-247b23fe5ade?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=9b3d9f84c0a2a4c5d6e7f8a9b0c1d2e3",
+        gallery:[
+          "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=9b3d9f84c0a2a4c5d6e7f8a9b0c1d2e3",
+          "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=3b1f2f3d4e5c6b7a8f9e0d1c2b3a4f5d"
+        ],
+        plans:[
+          {id:1,title:"Delhi Heritage — 2D/1N",price:"₹7,999",details:"Historical walk & monuments"},
+          {id:2,title:"Delhi + Agra — 3D/2N",price:"₹12,999",details:"Includes Taj Mahal day trip"}
+        ],
+        locals:[
+          {name:"Priya (Delhi)",phone:"9529730333"},
+          {name:"Anil (Delhi)",phone:"9529730334"}
+        ]
+      },
+      bengaluru: {
+        key:'bengaluru', name:"Bengaluru",
+        desc:"Garden city & IT hub — parks, cafes, nearby hill escapes.",
+        mainImg:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=4d0f6b8e2f1c3b2a6a8e7d4c9b0a2d1b",
+        gallery:["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=4d0f6b8e2f1c3b2a6a8e7d4c9b0a2d1b"],
+        plans:[{id:1,title:"Bengaluru Day — 1D",price:"₹3,999",details:"City & gardens"}],
+        locals:[{name:"Kiran (Bengaluru)",phone:"9529730335"}]
+      },
+      hyderabad: {
+        key:'hyderabad', name:"Hyderabad",
+        desc:"Historic city — Charminar, Golconda Fort and famous biryani.",
+        mainImg:"https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=5a1b7d8c9f2e3d4c6b7a8e9f0c1d2e3f",
+        gallery:["https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=5a1b7d8c9f2e3d4c6b7a8e9f0c1d2e3f"],
+        plans:[{id:1,title:"Hyderabad — 2D/1N",price:"₹8,999",details:"Monuments & cuisine"}],
+        locals:[{name:"Imran (Hyderabad)",phone:"9529730336"}]
+      },
+      chennai: {
+        key:'chennai', name:"Chennai",
+        desc:"Coastal metropolis — temples and Marina beach.",
+        mainImg:"https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=ad6d1f6a2a1b6fce5b3c1d4f7e6a9b0c",
+        gallery:["https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=ad6d1f6a2a1b6fce5b3c1d4f7e6a9b0c"],
+        plans:[{id:1,title:"Chennai — 1D",price:"₹3,499",details:"Temples & beach"}],
+        locals:[{name:"Arun (Chennai)",phone:"9529730337"}]
+      },
+      pune: {
+        key:'pune', name:"Pune",
+        desc:"Cultural & educational hub near hill stations — cafes, forts and heritage.",
+        mainImg:"https://images.unsplash.com/photo-1544012526-9f7d3d7de9c2?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d",
+        gallery:["https://images.unsplash.com/photo-1544012526-9f7d3d7de9c2?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d","https://images.unsplash.com/photo-1568495248636-6432bb0a7df2?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=7f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c"],
+        plans:[
+          {id:1,title:"Pune City — 1D",price:"₹2,499",details:"Historical places & food walk"},
+          {id:2,title:"Pune + Lonavala — 2D/1N",price:"₹5,999",details:"Hill station getaway"},
+          {id:3,title:"Pune Family — 3D/2N",price:"₹9,499",details:"Family-friendly activities & stays"}
+        ],
+        locals:[
+          {name:"Kiran (Pune)",phone:"9529730330"},
+          {name:"Seema (Pune)",phone:"9529730338"}
+        ]
+      },
+      kolkata: {
+        key:'kolkata', name:"Kolkata",
+        desc:"City of Joy — colonial architecture, sweets and cultural hubs.",
+        mainImg:"https://images.unsplash.com/photo-1525959657015-79c3a3a8f6d0?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1d2c3b4a5f6e7d8c9a0b1c2d3e4f5a6b",
+        gallery:["https://images.unsplash.com/photo-1525959657015-79c3a3a8f6d0?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1d2c3b4a5f6e7d8c9a0b1c2d3e4f5a6b"],
+        plans:[{id:1,title:"Kolkata Heritage — 2D",price:"₹5,999",details:"Culture & food"}],
+        locals:[{name:"Suman (Kolkata)",phone:"9529730339"}]
+      },
+      jaipur: {
+        key:'jaipur', name:"Jaipur",
+        desc:"Pink City — forts, palaces, and royal history.",
+        mainImg:"https://i.postimg.cc/cJtbV9qK/jaipur.jpg", // postimg for high-quality
+        gallery:["https://picsum.photos/seed/jpr1/900/600","https://picsum.photos/seed/jpr2/900/600"],
+        plans:[{id:1,title:"Jaipur Royal — 2D/1N",price:"₹6,499",details:"Forts & palaces"}],
+        locals:[{name:"Gita (Jaipur)",phone:"9529730340"}]
+      },
+      ahmedabad: {
+        key:'ahmedabad', name:"Ahmedabad",
+        desc:"Historic city — Sabarmati riverfront and rich textile heritage.",
+        mainImg:"https://images.unsplash.com/photo-1594679625092-2f6b3f4d5507?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=6a1b2c3d4e5f6b7a8c9d0e1f2a3b4c5d",
+        gallery:["https://images.unsplash.com/photo-1594679625092-2f6b3f4d5507?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=6a1b2c3d4e5f6b7a8c9d0e1f2a3b4c5d"],
+        plans:[{id:1,title:"Ahmedabad — 2D",price:"₹6,299",details:"Heritage & local tours"}],
+        locals:[{name:"Hiren (Ahmedabad)",phone:"9529730341"}]
+      },
+      goa: {
+        key:'goa', name:"Goa",
+        desc:"Beach paradise — sun, sand, watersports and nightlife.",
+        mainImg:"https://i.postimg.cc/0N8Qpwny/goa.jpg",
+        gallery:["https://picsum.photos/seed/goa1/900/600","https://picsum.photos/seed/goa2/900/600"],
+        plans:[
+          {id:1,title:"Goa Fun — 4N/5D",price:"₹18,500",details:"Beaches & watersports"},
+          {id:2,title:"Goa Family — 3N/4D",price:"₹14,999",details:"Relaxed family holiday"}
+        ],
+        locals:[{name:"Rafael (Goa)",phone:"9529730342"}]
+      }
+    };
+
+    // ---------- DOM refs ----------
+    const toursGrid = document.getElementById('toursGrid');
+    const infoBanner = document.getElementById('infoBanner');
+    const cityModal = document.getElementById('cityModal');
+    const cityList = document.getElementById('cityList');
+    const citySearchInput = document.getElementById('citySearchInput');
+    const closeCityModal = document.getElementById('closeCityModal');
+    const contactsModal = document.getElementById('contactsModal');
+    const contactsGrid = document.getElementById('contactsGrid');
+    const closeContacts = document.getElementById('closeContacts');
+    const contactLocalLink = document.getElementById('contactLocalLink');
+    const cityDetailsModal = document.getElementById('cityDetailsModal');
+    const closeCityDetails = document.getElementById('closeCityDetails');
+    const cityTitleModal = document.getElementById('cityTitleModal');
+    const cityMainImgModal = document.getElementById('cityMainImgModal');
+    const cityInfoModal = document.getElementById('cityInfoModal');
+    const cityGalleryModal = document.getElementById('cityGalleryModal');
+    const startLocationSelect = document.getElementById('startLocationSelect');
+    const searchBtn = document.getElementById('searchBtn');
+    const arrivalDate = document.getElementById('arrivalDate');
+    const departureDate = document.getElementById('departureDate');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+
+    // ---------- helper: render grid ----------
+    function renderToursGrid(filterKey){
+      toursGrid.innerHTML = '';
+      Object.keys(citiesData).forEach(key=>{
+        const c = citiesData[key];
+        if (!filterKey || key === filterKey || c.name.toLowerCase().includes(filterKey)){
+          const card = document.createElement('article');
+          card.className = 'tour-card';
+          card.setAttribute('data-key', key);
+          card.innerHTML = `
+            <img src="${c.mainImg}" alt="${c.name}">
+            <div class="card-body">
+              <h3>${c.name}</h3>
+              <p>${c.desc}</p>
+            </div>
+          `;
+          card.addEventListener('click', ()=> openCityDetails(key));
+          card.tabIndex = 0;
+          card.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') openCityDetails(key); });
+          toursGrid.appendChild(card);
+        }
+      });
+    }
+    renderToursGrid();
+
+    // ---------- city list render for modal ----------
+    function renderCityList(filter=''){
+      cityList.innerHTML = '';
+      const f = (filter||'').trim().toLowerCase();
+      Object.keys(citiesData).forEach(k=>{
+        const c = citiesData[k];
+        if (!f || c.name.toLowerCase().includes(f) || k.includes(f)){
+          const item = document.createElement('div');
+          item.className = 'city-item';
+          item.textContent = c.name;
+          item.setAttribute('data-key', k);
+          item.tabIndex = 0;
+          item.addEventListener('click', ()=> { openCityDetails(k); closeModal(cityModal); });
+          item.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') { openCityDetails(k); closeModal(cityModal); }});
+          cityList.appendChild(item);
+        }
+      });
+      if (!cityList.innerHTML) cityList.innerHTML = '<div style="grid-column:1/-1;padding:10px;color:#666">No cities found</div>';
+    }
+    renderCityList();
+
+    // ---------- open/close modal helpers ----------
+    function openModal(mod){ mod.style.display = 'flex'; mod.setAttribute('aria-hidden','false'); }
+    function closeModal(mod){ mod.style.display = 'none'; mod.setAttribute('aria-hidden','true'); }
+
+    closeCityModal.addEventListener('click', ()=> closeModal(cityModal));
+    closeContacts.addEventListener('click', ()=> closeModal(contactsModal));
+    closeCityDetails.addEventListener('click', ()=> closeModal(cityDetailsModal));
+
+    // close on backdrop click
+    [cityModal, contactsModal, cityDetailsModal, lightbox].forEach(mod=>{
+      mod.addEventListener('click', function(e){
+        if (e.target === mod) closeModal(mod);
+      });
+    });
+
+    // ---------- contact locals ----------
+    contactLocalLink.addEventListener('click', function(e){
+      e.preventDefault();
+      renderContacts();
+      openModal(contactsModal);
+    });
+
+    function renderContacts(){
+      contactsGrid.innerHTML = '';
+      Object.keys(citiesData).forEach(k=>{
+        const c = citiesData[k];
+        c.locals.forEach(local=>{
+          const card = document.createElement('div');
+          card.className = 'contact-card';
+          card.innerHTML = `
+            <h4>${local.name}</h4>
+            <div>City: <strong>${c.name}</strong></div>
+            <div class="phone">${local.phone}</div>
+            <div style="margin-top:8px">
+              <button class="btn-chat" data-phone="${local.phone}" data-name="${local.name}" data-city="${c.name}"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</button>
+            </div>
+          `;
+          card.querySelector('.btn-chat').addEventListener('click', function(){
+            const phone = this.dataset.phone.replace(/\D/g,'');
+            const name = this.dataset.name;
+            const cityName = this.dataset.city;
+            const text = encodeURIComponent(`Hi ${name}, I need local assistance in ${cityName}.`);
+            window.open(`https://wa.me/91${phone}?text=${text}`, '_blank');
+          });
+          contactsGrid.appendChild(card);
         });
+      });
+    }
 
-        // Smooth Scroll
-        function scrollToSection(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-                navMenu.classList.remove('active');
-            }
-        }
+    // ---------- open city details modal ----------
+    function openCityDetails(key){
+      const city = citiesData[key];
+      if (!city) return;
+      cityTitleModal.textContent = city.name;
+      cityMainImgModal.innerHTML = `<img src="${city.mainImg}" alt="${city.name}" style="width:100%;height:300px;object-fit:cover;border-radius:8px">`;
+      cityInfoModal.innerHTML = `<p>${city.desc}</p>`;
 
-        // WhatsApp Integration
-        function openWhatsApp(packageName) {
-            const message = `Hi! I'm interested in the ${packageName} package. Please provide more details.`;
-            const whatsappURL = `https://wa.me/9529730330?text=${encodeURIComponent(message)}`;
-            window.open(whatsappURL, '_blank');
-        }
+      // plans
+      const plansContainer = document.createElement('div');
+      plansContainer.className = 'plans';
+      city.plans.forEach(p=>{
+        const div = document.createElement('div');
+        div.className = 'plan';
+        div.innerHTML = `<h4>${p.title}</h4><p style="color:#555">${p.details}</p><div class="price">${p.price}</div>
+         <button class="btn-book" data-city="${key}" data-plan="${encodeURIComponent(p.title)}">Book Trip</button>`;
+        plansContainer.appendChild(div);
+      });
+      cityInfoModal.appendChild(plansContainer);
 
-        // Contact Form Handler
-        function handleContactForm(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            const whatsappMessage = `Hello! My name is ${name}. Email: ${email}. Message: ${message}`;
-            const whatsappURL = `https://wa.me/9529730330?text=${encodeURIComponent(whatsappMessage)}`;
-            
-            window.open(whatsappURL, '_blank');
-            
-            // Reset form
-            event.target.reset();
-        }
-    </script>
+      // gallery
+      cityGalleryModal.innerHTML = '';
+      city.gallery.forEach(src=>{
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = city.name;
+        img.style.borderRadius = '8px';
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', ()=> openLightbox(src));
+        cityGalleryModal.appendChild(img);
+      });
+
+      // attach booking handlers
+      cityInfoModal.querySelectorAll('.btn-book').forEach(btn=>{
+        btn.addEventListener('click', function(){
+          const cityKey = this.dataset.city;
+          const plan = decodeURIComponent(this.dataset.plan);
+          openWhatsAppBooking(cityKey, plan);
+        });
+      });
+
+      openModal(cityDetailsModal);
+    }
+
+    // ---------- booking opens WhatsApp to main business number ----------
+    function openWhatsAppBooking(cityKey, planTitle){
+      const city = citiesData[cityKey];
+      const phone = '9529730330'; // main business number
+      const arr = arrivalDate.value || 'TBD';
+      const dep = departureDate.value || 'TBD';
+      const trav = document.getElementById('travelers').value || 'TBD';
+      const text = encodeURIComponent(`Hello, I want to book: ${planTitle} in ${city.name}. Arrival: ${arr}, Departure: ${dep}, Travelers: ${trav}.`);
+      window.open(`https://wa.me/91${phone}?text=${text}`, '_blank');
+    }
+
+    // ---------- lightbox ----------
+    function openLightbox(src){
+      lightbox.style.display = 'flex'; lightbox.setAttribute('aria-hidden','false'); lightboxImg.src = src;
+    }
+    lightbox.addEventListener('click', function(){ lightbox.style.display = 'none'; lightbox.setAttribute('aria-hidden','true'); lightboxImg.src = ''; });
+
+    // attach gallery images
+    document.querySelectorAll('.gItem').forEach(img=>{
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', ()=> openLightbox(img.src));
+    });
+
+    // ---------- start location select: auto open city -->
+    startLocationSelect.addEventListener('change', function(){
+      const val = this.value;
+      if (val) openCityDetails(val);
+    });
+
+    // ---------- search button open city modal ----------
+    searchBtn.addEventListener('click', function(){
+      renderCityList();
+      openModal(cityModal);
+      citySearchInput.focus();
+    });
+    citySearchInput.addEventListener('input', ()=> renderCityList(citySearchInput.value));
+
+    // ---------- date validation ----------
+    arrivalDate.addEventListener('change', ()=>{ if (departureDate.value && departureDate.value < arrivalDate.value) departureDate.value = arrivalDate.value; });
+    departureDate.addEventListener('change', ()=>{ if (arrivalDate.value && departureDate.value < arrivalDate.value) departureDate.value = arrivalDate.value; });
+
+    // ---------- clear location ----------
+    document.getElementById('clear-location').addEventListener('click', ()=>{
+      startLocationSelect.value = 'mumbai';
+    });
+
+    // ---------- keyboard escapes ----------
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape'){
+        [cityModal, contactsModal, cityDetailsModal, lightbox].forEach(m=>{ if (m.style.display === 'flex') closeModal(m); });
+      }
+    });
+
+    // ---------- small a11y styles for focus ----------
+    const style = document.createElement('style');
+    style.textContent = '.city-item:focus{outline:3px solid rgba(248,195,8,.8);outline-offset:2px} .tour-card:focus{outline:3px solid rgba(37,211,102,.8)}';
+    document.head.appendChild(style);
+
+    // ---------- optional: preselect from URL (?city=pune) ----------
+    (function initFromUrl(){
+      try{
+        const url = new URL(window.location.href);
+        const q = url.searchParams.get('city') || window.location.hash.replace('#','');
+        if (q && citiesData[q.toLowerCase()]) openCityDetails(q.toLowerCase());
+      } catch(e){}
+    })();
+
+  })();
+  </script>
 </body>
 </html>
