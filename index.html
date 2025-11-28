@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tourism — Connect & Explore</title>
 
-  <!-- Google Fonts: Outfit (Modern UI) + Playfair Display (Headings) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
 
-  <!-- Libraries -->
+  <!-- Libraries (GSAP + Three.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -27,25 +27,24 @@
     --light: #f8f9fa;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { width: 100%; overflow-x: hidden; } /* Removed height:100% to allow scroll growth */
+  html, body { width: 100%; overflow-x: hidden; }
   body { font-family: 'Outfit', sans-serif; color: var(--text); background: var(--light); line-height: 1.6; }
   a { text-decoration: none; color: inherit; transition: 0.3s; }
   h1, h2, h3, h4 { font-family: 'Playfair Display', serif; color: #111; }
   .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-  /* ---------------- 2. HEADER (OVERLAP FIX) ---------------- */
+  /* ---------------- 2. HEADER ---------------- */
   header {
     position: relative;
     width: 100%;
-    /* Flex Layout to manage vertical space */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end; /* Pushes content down, search box handles bottom spacing */
-    min-height: 100vh; /* Ensures it covers screen but grows if needed */
+    justify-content: flex-end;
+    min-height: 100vh;
     background: #000;
     z-index: 10;
-    padding-top: 100px; /* Space for fixed/absolute nav */
+    padding-top: 100px;
   }
 
   /* Three.js Background */
@@ -53,7 +52,7 @@
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     z-index: 1;
-    pointer-events: auto; /* Allow interaction */
+    pointer-events: auto;
   }
   .header-bg {
     position: absolute;
@@ -87,10 +86,10 @@
     text-align: center;
     width: 90%;
     max-width: 900px;
-    margin-bottom: auto; /* Pushes it to vertical center with margin-top: auto (implicit in flex) */
+    margin-bottom: auto;
     margin-top: auto;
     pointer-events: none;
-    padding-bottom: 40px; /* Gap before search box */
+    padding-bottom: 40px;
   }
   .hero-mask { overflow: hidden; display: block; }
   .header-section h1 {
@@ -107,7 +106,6 @@
     position: relative;
     width: 100%;
     z-index: 20;
-    /* This creates the floating overlap effect cleanly */
     transform: translateY(50%); 
   }
 
@@ -145,7 +143,6 @@
     background: #fff;
     position: relative;
     z-index: 2;
-    /* Top padding compensates for the search box overlap (half height ~ 80px + buffer) */
     padding-top: 140px; 
     padding-bottom: 80px;
   }
@@ -213,34 +210,15 @@
 
   /* ---------------- 5. RESPONSIVE ---------------- */
   @media(max-width: 900px) {
-    header { 
-      min-height: auto; 
-      padding-top: 90px;
-      /* Remove bottom padding on mobile, let the stack flow naturally */
-      padding-bottom: 40px; 
-    }
-    
+    header { min-height: auto; padding-top: 90px; padding-bottom: 40px; }
     .navBar { padding: 20px; }
     .navBar ul { display: none; }
     .nav-toggle { display: block; }
-    
     .header-section { margin-top: 30px; margin-bottom: 30px; }
     .header-section h1 { font-size: 3rem; }
-    
-    /* On Mobile, remove the floating overlap to prevent issues */
-    .travel-box-wrapper {
-      transform: none;
-      margin-top: 20px;
-      padding: 0 10px;
-    }
-    .travel-box {
-      width: 100%;
-      padding: 20px;
-    }
-    
-    /* Reset main padding since box isn't floating anymore */
+    .travel-box-wrapper { transform: none; margin-top: 20px; padding: 0 10px; }
+    .travel-box { width: 100%; padding: 20px; }
     main { padding-top: 60px; }
-    
     .about-container { flex-direction: column; }
     .gallery-masonry { column-count: 1; }
     .about-img { width: 100%; }
@@ -267,13 +245,12 @@
     </nav>
 
     <div class="header-section">
-      <!-- Masks for Reveal Animation -->
       <span class="hero-mask"><h1 class="hero-line">Explore The</h1></span>
       <span class="hero-mask"><h1 class="hero-line">Unseen World</h1></span>
       <h2 class="hero-sub">Curated Journeys for Every Generation</h2>
     </div>
 
-    <!-- SEARCH BOX WRAPPER -->
+    <!-- SEARCH BOX -->
     <div class="travel-box-wrapper">
       <div class="travel-box">
         <div class="travel-plans">
@@ -282,7 +259,8 @@
             <div class="custom-select">
               <i class="fa-solid fa-earth-americas"></i>
               <select id="destSelect">
-                <option value="seniors">👴 Senior Citizens Group (Special)</option>
+                <option value="all">Check All Destinations</option>
+                <option value="seniors">👴 Senior Citizens Group</option>
                 <option value="mumbai">Mumbai, India</option>
                 <option value="delhi">Delhi, India</option>
                 <option value="goa">Goa, India</option>
@@ -321,8 +299,6 @@
 
   <!-- MAIN -->
   <main class="container">
-    
-    <!-- Tours -->
     <section>
       <div class="section-header">
         <h2>Trending Destinations</h2>
@@ -331,7 +307,6 @@
       <div id="toursGrid" class="tours-grid"></div>
     </section>
 
-    <!-- Gallery -->
     <section id="gallery" style="margin-top:120px">
       <div class="section-header">
         <h2>Visual Stories</h2>
@@ -340,7 +315,6 @@
       <div class="gallery-masonry" id="mainGallery"></div>
     </section>
 
-    <!-- About -->
     <section id="about">
       <div class="about-container">
         <div class="about-text">
@@ -375,7 +349,6 @@
       <div class="footer-col">
         <h4>Visit Office</h4>
         <div class="map-card">
-          <!-- Real Google Map Embed -->
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.365313988602!2d73.79125677519356!3d18.59914448250965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b91d245781bd%3A0x6b6942c755359143!2sPimple%20Saudagar%2C%20Pimpri-Chinchwad%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1701332400000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
@@ -404,7 +377,12 @@
     <div class="modal" style="max-width:400px;text-align:center">
        <i class="fa-solid fa-xmark" id="closeSearch" style="position:absolute;top:20px;right:20px;font-size:1.5rem;cursor:pointer"></i>
        <h3>Choose Destination</h3>
-       <div id="cityList" style="margin-top:20px;display:grid;gap:10px;text-align:left"></div>
+       
+       <!-- REAL SEARCH INPUT -->
+       <input type="text" id="citySearchInput" placeholder="Type to search (e.g. Goa)" 
+       style="width:100%;padding:12px;margin:15px 0;border:1px solid #ddd;border-radius:6px;background:#f9f9f9">
+       
+       <div id="cityList" style="margin-top:10px;display:grid;gap:10px;text-align:left;max-height:300px;overflow-y:auto"></div>
     </div>
   </div>
 
@@ -414,41 +392,30 @@
   </div>
 
   <script>
-  // ================= 1. NEW THREE.JS ANIMATION (Network Connections) =================
+  // ================= 1. THREE.JS ANIMATION (Network Connections) =================
   (function initThreeJS() {
     const container = document.getElementById('canvas-container');
     const scene = new THREE.Scene();
-    
-    // Camera
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 150;
 
-    // Renderer
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     container.appendChild(renderer.domElement);
 
-    // Group to hold everything
     const group = new THREE.Group();
     scene.add(group);
 
-    // Particles Data
     const particleCount = 200;
     const geometry = new THREE.BufferGeometry();
     const positions = [];
     
-    // Create random points on a sphere
     for(let i=0; i<particleCount; i++){
       const theta = THREE.Math.degToRad(Math.random() * 360);
       const phi = THREE.Math.degToRad(Math.random() * 360);
       const radius = 80 + Math.random() * 20;
-
-      const x = radius * Math.sin(theta) * Math.cos(phi);
-      const y = radius * Math.sin(theta) * Math.sin(phi);
-      const z = radius * Math.cos(theta);
-
-      positions.push(x, y, z);
+      positions.push(radius * Math.sin(theta) * Math.cos(phi), radius * Math.sin(theta) * Math.sin(phi), radius * Math.cos(theta));
     }
     
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
@@ -456,22 +423,16 @@
     const particles = new THREE.Points(geometry, pMaterial);
     group.add(particles);
 
-    // Interactive Rotation
-    let mouseX = 0;
-    let mouseY = 0;
+    let mouseX = 0, mouseY = 0;
     document.addEventListener('mousemove', (e) => {
         mouseX = (e.clientX - window.innerWidth/2) * 0.0005;
         mouseY = (e.clientY - window.innerHeight/2) * 0.0005;
     });
 
     function animate() {
-        // Continuous slow rotation
         group.rotation.y += 0.002;
-        
-        // Mouse interaction smoothing
         group.rotation.x += (mouseY - group.rotation.x) * 0.05;
         group.rotation.y += (mouseX - group.rotation.y) * 0.05;
-        
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
     }
@@ -488,57 +449,13 @@
   (function initGSAP() {
     gsap.registerPlugin(ScrollTrigger);
 
-    // 1. Text Reveal
-    gsap.from(".hero-line", {
-        y: 120,
-        duration: 1.5,
-        stagger: 0.2,
-        ease: "power4.out",
-        delay: 0.2
-    });
-    
-    gsap.from(".hero-sub", {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-        delay: 1.2,
-        ease: "power2.out"
-    });
+    gsap.from(".hero-line", { y: 120, duration: 1.5, stagger: 0.2, ease: "power4.out", delay: 0.2 });
+    gsap.from(".hero-sub", { opacity: 0, y: 20, duration: 1, delay: 1.2, ease: "power2.out" });
+    gsap.from(".travel-box", { y: -100, opacity: 0, scale: 0.95, duration: 1.5, delay: 0.8, ease: "elastic.out(1, 0.5)" });
+    gsap.from(".input-group", { y: 20, opacity: 0, duration: 0.6, stagger: 0.1, delay: 1.4, ease: "back.out(1.7)" });
+    gsap.from(".tour-card", { scrollTrigger: { trigger: ".tours-grid", start: "top 85%" }, y: 60, opacity: 0, duration: 0.8, stagger: 0.15 });
+    gsap.from(".g-item", { scrollTrigger: { trigger: ".gallery-masonry", start: "top 85%" }, y: 60, opacity: 0, duration: 0.8, stagger: 0.1 });
 
-    // 2. Search Box Drop (Elastic Bounce)
-    // IMPORTANT: Wait for DOM to handle layout first
-    gsap.from(".travel-box", {
-        y: -100,
-        opacity: 0,
-        scale: 0.95,
-        duration: 1.5,
-        delay: 0.8,
-        ease: "elastic.out(1, 0.5)"
-    });
-
-    // 3. Stagger Inputs
-    gsap.from(".input-group", {
-        y: 20,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        delay: 1.4,
-        ease: "back.out(1.7)"
-    });
-
-    // 4. Scroll Animations (Cards)
-    gsap.from(".tour-card", {
-        scrollTrigger: { trigger: ".tours-grid", start: "top 85%" },
-        y: 60, opacity: 0, duration: 0.8, stagger: 0.15
-    });
-    
-    // 5. Scroll Animations (Gallery)
-    gsap.from(".g-item", {
-        scrollTrigger: { trigger: ".gallery-masonry", start: "top 85%" },
-        y: 60, opacity: 0, duration: 0.8, stagger: 0.1
-    });
-
-    // Mobile Menu
     const nav = document.querySelector('.navBar ul');
     document.getElementById('navToggle').onclick = () => {
         if(nav.style.display === 'flex') {
@@ -558,31 +475,24 @@
     };
   })();
 
-  // ================= 3. APP LOGIC & DATA =================
+  // ================= 3. APP LOGIC & SEARCH =================
   (function initApp(){
     const data = {
       seniors: {
         name: "Senior Citizens Group",
-        desc: "Relaxed itinerary with medical support. Enjoy card games, music nights, and slow-paced sightseeing.",
+        desc: "Relaxed itinerary with medical support.",
         img: "https://images.unsplash.com/photo-1534125950882-72c72b8c9d41?q=80&w=1600",
         isSpecial: true,
-        gallery: [
-            "https://images.unsplash.com/photo-1552063920-c20536c4b9d5?q=80&w=600",
-            "https://images.unsplash.com/photo-1516724562728-afc824a36e84?q=80&w=600",
-            "https://images.unsplash.com/photo-1574709193635-f09c04d0b04c?q=80&w=600"
-        ],
-        plans: [
-            {title: "Golden Years Goa (5D)", price: "₹18,000", info: "Resort stay + Old Songs Night"},
-            {title: "Spiritual Varanasi (3D)", price: "₹14,000", info: "VIP Darshan + Boat Ride"}
-        ],
-        guides: [{name: "Dr. Sharma", phone: "919529730330"}, {name: "Mr. Deshmukh", phone: "919529730330"}]
+        gallery: [ "https://images.unsplash.com/photo-1552063920-c20536c4b9d5?q=80&w=600", "https://images.unsplash.com/photo-1574709193635-f09c04d0b04c?q=80&w=600" ],
+        plans: [ {title: "Golden Years Goa", price: "₹18,000", info: "Resort stay"}, {title: "Spiritual Varanasi", price: "₹14,000", info: "VIP Darshan"} ],
+        guides: [{name: "Dr. Sharma", phone: "919529730330"}]
       },
       mumbai: {
         name: "Mumbai",
         desc: "Heritage, sea, and bollywood dreams.",
         img: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1600",
         gallery: ["https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=600"],
-        plans: [{title: "Mumbai Darshan", price: "₹5,000", info: "Gateway, Marine Drive, Chowpatty"}],
+        plans: [{title: "Mumbai Darshan", price: "₹5,000", info: "Gateway, Marine Drive"}],
         guides: [{name: "Ravi", phone: "919529730330"}]
       },
       goa: {
@@ -590,7 +500,7 @@
         desc: "Beaches, parties, and portuguese history.",
         img: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=1600",
         gallery: ["https://images.unsplash.com/photo-1590393766289-4b68e59e211b?q=80&w=600"],
-        plans: [{title: "Beach Fun", price: "₹12,000", info: "North Goa + Watersports"}],
+        plans: [{title: "Beach Fun", price: "₹12,000", info: "North Goa"}],
         guides: [{name: "Roshan", phone: "919529730330"}]
       },
       delhi: {
@@ -598,7 +508,7 @@
         desc: "Capital city with Red Fort and Chandni Chowk.",
         img: "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1600",
         gallery: ["https://images.unsplash.com/photo-1595349090606-d7072f7a08b6?q=80&w=600"],
-        plans: [{title: "Delhi Heritage", price: "₹6,000", info: "History Walk + Street Food"}],
+        plans: [{title: "Heritage Walk", price: "₹6,000", info: "Old Delhi"}],
         guides: [{name: "Amit", phone: "919529730330"}]
       },
       ladakh: {
@@ -606,7 +516,7 @@
         desc: "High passes, monasteries and Pangong lake.",
         img: "https://images.unsplash.com/photo-1581793434119-944dd80a402f?q=80&w=1600",
         gallery: ["https://images.unsplash.com/photo-1549646271-9c3f8510c439?q=80&w=600"],
-        plans: [{title: "Bike Trip", price: "₹25,000", info: "Leh - Nubra - Pangong"}],
+        plans: [{title: "Bike Trip", price: "₹25,000", info: "Leh - Nubra"}],
         guides: [{name: "Tenzin", phone: "919529730330"}]
       }
     };
@@ -641,7 +551,7 @@
         gal.innerHTML += `<div class="g-item" onclick="openLightbox('${src}')"><img src="${src}"></div>`;
     });
 
-    // Functions
+    // Open Details
     window.openDetails = (k) => {
         const item = data[k];
         if(!item) return;
@@ -675,6 +585,7 @@
         openMod('lightbox');
     }
 
+    // Modal System
     function openMod(id){
         const m = document.getElementById(id);
         m.style.display = 'flex';
@@ -684,7 +595,6 @@
         },10);
     }
     
-    // Close Logic
     document.querySelectorAll('.modal-backdrop').forEach(b => {
         b.onclick = (e) => {
             if(e.target === b || e.target.id.includes('close')) {
@@ -706,18 +616,43 @@
         openMod('contactModal');
     }
 
+    // ---------------- REAL SEARCH LOGIC ----------------
+    // 1. Populate List
+    function renderCityList(filter = '') {
+        const l = document.getElementById('cityList');
+        l.innerHTML = '';
+        const search = filter.toLowerCase();
+        let found = false;
+
+        Object.keys(data).forEach(k => {
+            if(data[k].name.toLowerCase().includes(search)) {
+                found = true;
+                l.innerHTML += `<div onclick="openDetails('${k}');document.getElementById('closeSearch').click()" style="padding:12px;background:#eee;border-radius:8px;cursor:pointer;font-weight:600">${data[k].name}</div>`;
+            }
+        });
+        if(!found) l.innerHTML = '<div style="color:#777">No destinations found.</div>';
+    }
+
+    // 2. Open Search Modal
     document.getElementById('btnSearch').onclick = () => {
         const val = document.getElementById('destSelect').value;
-        if(data[val]) openDetails(val);
-        else {
-            const l = document.getElementById('cityList');
-            l.innerHTML = '';
-            Object.keys(data).forEach(k => {
-                l.innerHTML += `<div onclick="openDetails('${k}');document.getElementById('closeSearch').click()" style="padding:12px;background:#eee;border-radius:8px;cursor:pointer;font-weight:600">${data[k].name}</div>`;
-            });
+        // If dropdown is specific, go there
+        if(data[val]) {
+            openDetails(val);
+        } else {
+            // Otherwise open modal list
+            renderCityList(); 
             openMod('searchModal');
+            document.getElementById('citySearchInput').value = '';
+            document.getElementById('citySearchInput').focus();
         }
     }
+
+    // 3. Search Input Event Listener
+    document.getElementById('citySearchInput').addEventListener('input', (e) => {
+        renderCityList(e.target.value);
+    });
+
   })();
   </script>
 </body>
