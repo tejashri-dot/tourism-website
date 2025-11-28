@@ -3,132 +3,149 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tourism — Demo</title>
+  <title>Tourism — Explore the World</title>
 
   <!-- Font Awesome + Google Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
   <style>
   /* ---------------- Reset & base ---------------- */
   *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
-  body{font-family:'Lato',sans-serif;color:#111;background:#fff;-webkit-font-smoothing:antialiased}
+  html,body{height:100%;scroll-behavior:smooth}
+  body{font-family:'Lato',sans-serif;color:#2c3e50;background:#fdfdfd;-webkit-font-smoothing:antialiased;line-height:1.6}
   a{color:inherit;text-decoration:none}
-  .container{max-width:1100px;margin:0 auto;padding:0 16px}
+  h1,h2,h3,h4{font-family:'Playfair Display',serif;color:#111}
+  .container{max-width:1140px;margin:0 auto;padding:0 20px}
 
   /* ---------------- Header / Hero ---------------- */
   header{
-    height:720px;
-    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=5ebfae5f7f3f0b6f1f4a6b4b7f0cd2e7');
-    background-size:cover;background-position:center;background-attachment:fixed;position:relative;overflow:hidden;
+    height:85vh;
+    min-height:600px;
+    /* Beautiful landscape header */
+    background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=2070&auto=format&fit=crop');
+    background-size:cover;background-position:center;background-attachment:fixed;position:relative;
   }
-  header::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.45));pointer-events:none}
-  .navBar{display:flex;align-items:center;justify-content:space-between;padding:18px 16px;position:relative;z-index:5}
-  .logo{color:#fff;font-weight:800;font-size:1.4rem}
-  .navBar ul{display:flex;gap:18px;list-style:none;align-items:center}
-  .navBar a{color:#fff;font-weight:600;transition:color .25s}
+  header::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));z-index:1}
+
+  .navBar{display:flex;align-items:center;justify-content:space-between;padding:24px 20px;position:relative;z-index:10}
+  .logo{color:#fff;font-weight:900;font-size:1.8rem;text-transform:uppercase;letter-spacing:1px;text-shadow:0 2px 10px rgba(0,0,0,0.3)}
+  .navBar ul{display:flex;gap:30px;list-style:none;align-items:center}
+  .navBar a{color:#fff;font-weight:600;font-size:0.95rem;text-transform:uppercase;letter-spacing:0.5px;transition:color .3s}
   .navBar a:hover{color:#F8C308}
-  .nav-toggle{display:none;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:8px;border-radius:8px;color:#fff;cursor:pointer}
+  .nav-toggle{display:none;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);padding:10px;border-radius:6px;color:#fff;cursor:pointer}
 
-  .header-section{position:absolute;left:50%;top:36%;transform:translate(-50%,-50%);text-align:center;z-index:4}
-  .header-section h1{color:#fff;font-size:3rem;margin-bottom:8px;letter-spacing:.2px}
-  .header-section h2{color:#fff;font-size:1.05rem;font-weight:300;opacity:.95}
+  .header-section{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);text-align:center;z-index:5;width:90%}
+  .header-section h1{color:#fff;font-size:3.5rem;margin-bottom:15px;text-shadow:0 4px 15px rgba(0,0,0,0.4)}
+  .header-section h2{color:#f0f0f0;font-size:1.2rem;font-weight:300;font-family:'Lato',sans-serif;letter-spacing:1px}
 
-  /* ---------------- Travel box ---------------- */
-  .travel-box{position:absolute;left:50%;top:78%;transform:translate(-50%,-50%);width:94%;max-width:1100px;padding:16px;border-radius:14px;background:rgba(255,255,255,.95);box-shadow:0 18px 40px rgba(14,30,37,.12);z-index:6}
-  .travel-plans{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
-  .trips-p p{font-weight:700;font-size:16px;margin-bottom:6px}
-  .loc-box,.date-box{display:flex;gap:10px;align-items:center;padding:8px 12px;border-radius:10px;background:#EDEDED;min-width:200px;transition:transform .2s}
-  .loc-box:hover,.date-box:hover{transform:translateY(-2px)}
-  select,input[type="date"]{padding:8px;border-radius:8px;border:none;background:transparent;outline:none;font-size:1rem;color:#333}
-  .btn{background:#F8C308;border:none;padding:10px 18px;border-radius:10px;cursor:pointer;font-weight:800;transition:background .2s}
-  .btn:hover{background:#e0b107}
-  .search{margin-left:auto}
-  .loc-select{display:flex;gap:8px;align-items:center}
+  /* ---------------- Travel search box ---------------- */
+  .travel-box{position:absolute;left:50%;bottom:-60px;transform:translate(-50%,0);width:90%;max-width:1100px;padding:25px;border-radius:12px;background:#fff;box-shadow:0 20px 50px rgba(0,0,0,0.15);z-index:8}
+  .travel-plans{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+  
+  .input-group{flex:1;min-width:200px}
+  .input-group label{display:block;font-size:0.85rem;font-weight:700;color:#7f8c8d;margin-bottom:8px;text-transform:uppercase}
+  
+  .custom-select{display:flex;align-items:center;background:#f4f7f6;padding:12px;border-radius:8px;border:1px solid #e0e0e0;transition:border .3s}
+  .custom-select:focus-within{border-color:#F8C308}
+  .custom-select i{color:#F8C308;margin-right:10px;font-size:1.1rem}
+  select,input{border:none;background:transparent;outline:none;width:100%;font-size:1rem;color:#2c3e50;font-weight:600}
+  
+  .btn-search{background:#F8C308;color:#111;border:none;padding:16px 32px;border-radius:8px;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s;text-transform:uppercase;letter-spacing:0.5px}
+  .btn-search:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(248,195,8,0.3)}
 
-  /* ---------------- main ---------------- */
-  main{padding:40px 0 80px;background:#fff}
-  .section-title{font-size:1.6rem;margin-bottom:12px;color:#111}
-  .info-banner{display:none;max-width:1100px;margin:16px auto;padding:12px;border-radius:8px;background:#EEF9F1;color:#0A6D2A;text-align:center;font-weight:700}
+  /* ---------------- Main Content ---------------- */
+  main{padding-top:100px;padding-bottom:80px}
+  .section-header{text-align:center;margin-bottom:50px}
+  .section-header h2{font-size:2.5rem;margin-bottom:10px}
+  .section-header p{color:#7f8c8d;max-width:600px;margin:0 auto}
 
-  .tours-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+  /* Tour Grid */
+  .tours-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:30px}
+  
+  .tour-card{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.05);transition:all .4s ease;cursor:pointer;position:relative}
+  .tour-card:hover{transform:translateY(-10px);box-shadow:0 20px 40px rgba(0,0,0,0.12)}
+  .tour-card-img{height:220px;overflow:hidden;position:relative}
+  .tour-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .tour-card:hover .tour-card-img img{transform:scale(1.1)}
+  .tour-card-body{padding:20px}
+  .tour-card h3{font-size:1.3rem;margin-bottom:8px}
+  .tour-card p{font-size:0.95rem;color:#666;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  
+  .badge-special {position:absolute;top:15px;right:15px;background:#e74c3c;color:#fff;padding:6px 14px;border-radius:30px;font-size:0.8rem;font-weight:700;z-index:2;box-shadow:0 5px 15px rgba(231,76,60,0.4);text-transform:uppercase}
 
-  .tour-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 24px rgba(20,30,40,.06);transition:transform .45s,box-shadow .45s;cursor:pointer;position:relative}
-  .tour-card img{width:100%;height:180px;object-fit:cover;display:block;transition:transform .6s,filter .6s}
-  .tour-card:hover img{transform:scale(1.06) rotate(.8deg);filter:brightness(1.05)}
-  .tour-card .card-body{padding:12px}
-  .tour-card h3{font-size:1.05rem;margin-bottom:6px}
-  .tour-card p{font-size:.92rem;color:#444}
-  .tour-card::after{content:"";position:absolute;left:14px;top:14px;width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));backdrop-filter: blur(2px);box-shadow:0 6px 18px rgba(0,0,0,.08);opacity:0;transition:opacity .25s}
-  .tour-card:hover::after{opacity:1}
+  /* ---------------- Gallery (Pinterest Style) ---------------- */
+  .gallery-masonry{column-count:3;column-gap:20px}
+  .g-item{break-inside:avoid;margin-bottom:20px;border-radius:12px;overflow:hidden;cursor:pointer;position:relative}
+  .g-item img{width:100%;display:block;transition:transform .4s}
+  .g-item:hover img{transform:scale(1.05)}
+  @media(max-width:800px){.gallery-masonry{column-count:2}}
+  @media(max-width:500px){.gallery-masonry{column-count:1}}
 
-  /* highlight */
-  .tour-card.highlight{outline:3px solid #F8C308;box-shadow:0 18px 36px rgba(248,195,8,.12)}
+  /* ---------------- About Section ---------------- */
+  .about-container{display:flex;gap:40px;align-items:center;background:#f9f9f9;border-radius:20px;padding:40px;margin-top:20px}
+  .about-text{flex:1}
+  .about-text h2{margin-bottom:20px;font-size:2.2rem}
+  .about-text p{margin-bottom:15px;color:#555}
+  .about-features{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:20px}
+  .about-features li{display:flex;align-items:center;gap:10px;font-weight:700;color:#333}
+  .about-features i{color:#27ae60}
+  .about-img{flex:1;max-width:450px}
+  .about-img img{width:100%;border-radius:15px;box-shadow:0 15px 40px rgba(0,0,0,0.1)}
 
-  /* ---------------- modal (generic) ---------------- */
-  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:1200}
-  .modal{width:92%;max-width:920px;background:#fff;border-radius:12px;padding:18px;box-shadow:0 18px 40px rgba(0,0,0,.22);animation:slideIn .36s ease}
-  @keyframes slideIn{from{transform:translateY(-30px);opacity:0}to{transform:translateY(0);opacity:1}}
+  /* ---------------- Footer ---------------- */
+  footer{background:#1a1a1a;color:#ecf0f1;padding:60px 0 30px;margin-top:80px}
+  .footer-content{display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between}
+  .footer-col{flex:1;min-width:250px}
+  .footer-col h4{color:#fff;margin-bottom:20px;font-size:1.2rem}
+  .footer-links p{margin-bottom:12px;color:#bdc3c7}
+  .social-icons a{display:inline-flex;width:40px;height:40px;background:#333;color:#fff;align-items:center;justify-content:center;border-radius:50%;margin-right:10px;transition:background .3s}
+  .social-icons a:hover{background:#F8C308;color:#111}
+  
+  /* Map */
+  .map-card{background:#222;padding:15px;border-radius:12px}
+  .map-canvas{height:180px;background:#333;border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative}
+  .map-marker{width:20px;height:20px;background:#e74c3c;border-radius:50%;position:relative;box-shadow:0 0 20px rgba(231,76,60,0.6)}
+  
+  /* ---------------- Modals ---------------- */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;z-index:2000;opacity:0;transition:opacity .3s}
+  .modal-backdrop.active{opacity:1}
+  .modal{background:#fff;width:90%;max-width:900px;border-radius:15px;padding:30px;max-height:90vh;overflow-y:auto;position:relative;transform:translateY(20px);transition:transform .3s}
+  .modal-backdrop.active .modal{transform:translateY(0)}
+  
+  .close-modal{position:absolute;top:20px;right:20px;font-size:1.5rem;cursor:pointer;color:#777;transition:color .3s}
+  .close-modal:hover{color:#e74c3c}
 
-  .city-top{display:flex;gap:18px;flex-wrap:wrap}
-  .city-main-img{flex:0 0 420px;border-radius:10px;overflow:hidden;transition:transform .3s}
-  .city-main-img img{width:100%;height:300px;object-fit:cover;display:block;transition:transform .5s}
-  .city-main-img:hover img{transform:scale(1.02) rotate(-1deg)}
+  .city-details-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:30px}
+  .city-modal-img img{width:100%;height:350px;object-fit:cover;border-radius:10px}
+  .plan-card{background:#f8f9fa;padding:15px;border-radius:10px;margin-bottom:12px;border-left:4px solid #F8C308;transition:transform .2s}
+  .plan-card:hover{transform:translateX(5px)}
+  .plan-card h5{font-size:1.1rem;margin-bottom:5px}
+  .plan-price{font-weight:900;color:#e67e22;font-size:1.1rem}
+  
+  .city-gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+  .city-gallery-grid img{width:100%;height:100px;object-fit:cover;border-radius:6px;cursor:pointer}
 
-  .city-info{flex:1;min-width:260px}
-  .plans{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
-  .plan{background:#fff;padding:12px;border-radius:10px;box-shadow:0 8px 18px rgba(0,0,0,.06);transition:transform .3s}
-  .plan:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(0,0,0,.12)}
-  .plan h4{font-size:1rem;margin-bottom:8px}
-  .plan .price{font-weight:800;margin-top:8px;color:#D35400}
-  .btn-book{margin-top:10px;background:#25D366;color:#fff;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700}
+  /* List of cities in search */
+  .city-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:15px}
+  .city-list-item{padding:12px;background:#f1f2f6;border-radius:8px;cursor:pointer;text-align:center;font-weight:600;transition:background .2s}
+  .city-list-item:hover{background:#F8C308;color:#000}
 
-  /* ---------------- city list / picker ---------------- */
-  .city-list{max-height:320px;overflow:auto;margin-top:12px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-  .city-item{padding:10px;border-radius:8px;background:#f4f4f4;cursor:pointer;font-weight:700;display:flex;align-items:center;gap:10px;transition:background .2s}
-  .city-item:hover{background:#F8C308;color:#111}
+  /* Contacts */
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:15px}
+  .contact-card{background:#fdfdfd;border:1px solid #eee;padding:15px;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.03)}
+  .btn-wa{display:block;width:100%;background:#25D366;color:#fff;text-align:center;padding:10px;border-radius:6px;margin-top:10px;font-weight:700}
 
-  /* ---------------- contacts ---------------- */
-  .contacts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:12px}
-  .contact-card{background:#fff;padding:12px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.06);transition:transform .2s}
-  .contact-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(0,0,0,.12)}
-  .contact-card h4{margin-bottom:6px}
-  .contact-card .phone{font-weight:800;color:#0a6d2a;margin-bottom:8px}
+  /* Fab */
+  .fab-wa{position:fixed;bottom:30px;right:30px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:30px;box-shadow:0 10px 30px rgba(37,211,102,0.4);z-index:1900;transition:transform .3s}
+  .fab-wa:hover{transform:scale(1.1)}
 
-  /* ---------------- gallery & images ---------------- */
-  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:14px}
-  .gallery-grid img{width:100%;height:150px;object-fit:cover;border-radius:8px;cursor:pointer;transition:transform .4s,box-shadow .4s}
-  .gallery-grid img:hover{transform:scale(1.07) rotate(.6deg);box-shadow:0 12px 32px rgba(0,0,0,.2)}
-
-  /* ---------------- footer & map ---------------- */
-  footer{background:#151515;color:#ddd;padding:26px 16px;margin-top:34px}
-  .footer-group{display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}
-  .footer-icons{display:flex;gap:12px;margin-top:8px}
-  .footer-icons a{color:#ddd;font-size:1.2rem;transition:color .2s}
-  .footer-icons a:hover{color:#F8C308}
-
-  .map-card{background:#0f1720;color:#fff;border-radius:10px;padding:12px;min-width:260px}
-  .map-canvas{position:relative;height:200px;border-radius:8px;overflow:hidden;background:#0a1220;display:flex;align-items:center;justify-content:center}
-  .map-marker{position:absolute;width:16px;height:16px;background:#FF4B4B;border-radius:50%;transform:translate(-50%,-100%);left:58%;top:52%;box-shadow:0 6px 18px rgba(255,75,75,.22)}
-  .map-marker::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:rgba(255,75,75,.12);animation:pulse 1.6s infinite}
-  @keyframes pulse{0%{transform:translate(-50%,-50%) scale(.6);opacity:.9}50%{transform:translate(-50%,-50%) scale(1);opacity:.25}100%{transform:translate(-50%,-50%) scale(.6);opacity:.9}}
-
-  .path-anim path{stroke-dasharray:6 6;stroke:#FFD166;stroke-width:2;fill:none;animation:move 2.4s linear infinite}
-  @keyframes move{from{stroke-dashoffset:0}to{stroke-dashoffset:12}}
-
-  .fab-whatsapp{position:fixed;right:18px;bottom:20px;background:#25D366;color:#fff;width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:9999;box-shadow:0 12px 30px rgba(0,0,0,.22);cursor:pointer;transition:transform .2s}
-  .fab-whatsapp:hover{transform:scale(1.08)}
-
-  /* responsive */
+  /* Responsive */
   @media(max-width:900px){
-    .header-section h1{font-size:2.2rem}
-    .travel-box{top:82%}
-    .city-main-img{flex-basis:100%}
-    .city-info{flex-basis:100%}
-    .navBar ul{display:none}
-    .nav-toggle{display:block}
-    .city-list{grid-template-columns:repeat(1,1fr)}
+    .header-section h1{font-size:2.5rem}
+    .city-details-grid{grid-template-columns:1fr}
+    .about-container{flex-direction:column}
+    .about-img{max-width:100%}
   }
   </style>
 </head>
@@ -136,541 +153,454 @@
 
   <!-- HEADER -->
   <header>
-    <div class="container navBar" role="navigation" aria-label="Main navigation">
-      <a class="logo" href="#">Tourism</a>
-
+    <div class="container navBar">
+      <a class="logo" href="#">Tourism.</a>
       <ul>
-        <li><a href="#" id="contactLocalLink">Contact a local</a></li>
+        <li><a href="#" id="navContact">Local Guides</a></li>
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#about">About</a></li>
       </ul>
-      <button class="nav-toggle" id="openNav" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="nav-toggle" id="navToggle"><i class="fa-solid fa-bars"></i></div>
     </div>
 
     <div class="header-section">
-      <h1>Welcome to TOUR</h1>
-      <h2>A platform for travel information and services</h2>
+      <h1>Discover New Horizons</h1>
+      <h2>Curated journeys for families, seniors, and explorers.</h2>
     </div>
 
-    <!-- Travel box -->
-    <div class="travel-box container" role="search" aria-label="Trip search">
-      <div class="trips-p"><p>Trips</p></div>
-
-      <div class="travel-plans" aria-hidden="false">
-        <div>
-          <p>Starting Location</p>
-          <div class="loc-box">
+    <!-- Search Box -->
+    <div class="travel-box container">
+      <div class="travel-plans">
+        <div class="input-group">
+          <label>Destination</label>
+          <div class="custom-select">
             <i class="fa-solid fa-location-dot"></i>
-            <div class="loc-select">
-              <select id="startLocationSelect" aria-label="Select starting city">
-                <option value="mumbai">Mumbai</option>
-                <option value="delhi">Delhi</option>
-                <option value="bengaluru">Bengaluru</option>
-                <option value="hyderabad">Hyderabad</option>
-                <option value="chennai">Chennai</option>
-                <option value="pune">Pune</option>
-                <option value="kolkata">Kolkata</option>
-                <option value="jaipur">Jaipur</option>
-                <option value="ahmedabad">Ahmedabad</option>
-                <option value="goa">Goa</option>
-              </select>
-            </div>
-            <i class="fa-solid fa-xmark" id="clear-location" style="cursor:pointer;margin-left:8px" title="Clear"></i>
-          </div>
-        </div>
-
-        <div>
-          <p>Select Dates</p>
-          <div class="date-box">
-            <i class="fa-solid fa-calendar"></i>
-            <input id="arrivalDate" type="date" aria-label="Arrival date">
-            <input id="departureDate" type="date" aria-label="Departure date">
-          </div>
-        </div>
-
-        <div>
-          <p>Travelers</p>
-          <div class="select">
-            <select id="travelers" aria-label="Number of travelers">
-              <option disabled selected>Choose travelers</option>
-              <option>1</option><option>2</option><option>3</option><option>4</option>
+            <select id="destSelect">
+              <option value="seniors">👴 Senior Citizens Group (Special)</option>
+              <option value="mumbai">Mumbai</option>
+              <option value="delhi">Delhi</option>
+              <option value="goa">Goa</option>
+              <option value="jaipur">Jaipur</option>
+              <option value="kerala">Kerala</option>
+              <option value="varanasi">Varanasi</option>
+              <option value="udaipur">Udaipur</option>
+              <option value="ladakh">Ladakh</option>
             </select>
           </div>
         </div>
 
-        <div class="search">
-          <button class="btn" id="searchBtn" title="Search">Search</button>
+        <div class="input-group">
+          <label>Check In - Out</label>
+          <div class="custom-select">
+            <i class="fa-solid fa-calendar"></i>
+            <input type="text" placeholder="Select Dates" onfocus="(this.type='date')" id="dateInput">
+          </div>
         </div>
+
+        <div class="input-group">
+          <label>Travelers</label>
+          <div class="custom-select">
+            <i class="fa-solid fa-user-group"></i>
+            <select id="travelerSelect">
+              <option>2 Travelers</option>
+              <option>Small Family (3-4)</option>
+              <option>Large Group (5+)</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn-search" id="btnSearch">Explore Now</button>
       </div>
     </div>
   </header>
 
-  <!-- City picker modal -->
-  <div class="modal-backdrop" id="cityModal" aria-hidden="true">
-    <div class="modal" role="document" aria-labelledby="cityModalTitle">
-      <div style="display:flex;align-items:center;gap:10px">
-        <h3 id="cityModalTitle">Choose a city</h3>
-        <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
-          <input id="citySearchInput" placeholder="Search city..." style="padding:8px;border-radius:8px;border:1px solid #eee" />
-          <button id="closeCityModal" style="background:transparent;border:none;cursor:pointer"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-      </div>
-      <div class="city-list" id="cityList" tabindex="0"></div>
-    </div>
-  </div>
-
-  <!-- Contact a local modal -->
-  <div class="modal-backdrop" id="contactsModal" aria-hidden="true">
-    <div class="modal" role="document" aria-labelledby="contactsTitle">
-      <div style="display:flex;align-items:center;gap:10px">
-        <h3 id="contactsTitle">Contact a local</h3>
-        <button id="closeContacts" style="margin-left:auto;border:none;background:transparent;cursor:pointer"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <p style="margin-top:8px;color:#666">Tap a local to start a WhatsApp chat with them.</p>
-      <div class="contacts-grid" id="contactsGrid"></div>
-    </div>
-  </div>
-
-  <!-- City details modal -->
-  <div class="modal-backdrop" id="cityDetailsModal" aria-hidden="true">
-    <div class="modal" role="document" aria-labelledby="cityTitleModal">
-      <div style="display:flex;align-items:center;gap:10px">
-        <h3 id="cityTitleModal"></h3>
-        <button id="closeCityDetails" style="margin-left:auto;border:none;background:transparent;cursor:pointer"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-      <div class="city-top" id="cityTopInner" style="margin-top:12px">
-        <div class="city-main-img" id="cityMainImgModal"></div>
-        <div class="city-info" id="cityInfoModal"></div>
-      </div>
-      <div style="margin-top:12px">
-        <strong>Photos</strong>
-        <div class="gallery-grid" id="cityGalleryModal"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Info banner -->
-  <div class="info-banner" id="infoBanner"></div>
-
-  <!-- MAIN -->
-  <main class="container" id="mainContent">
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    
+    <!-- Tours Grid -->
     <section>
-      <h2 class="section-title">Popular India Destinations</h2>
-      <div id="toursGrid" class="tours-grid" role="list"></div>
+      <div class="section-header">
+        <h2>Trending Destinations</h2>
+        <p>From spiritual retreats to sunny beaches, explore our most popular packages.</p>
+      </div>
+      <div id="toursGrid" class="tours-grid"></div>
     </section>
 
-    <!-- Gallery -->
-    <section id="gallery" style="margin-top:34px">
-      <h2 class="section-title">Family Trip Gallery</h2>
-      <div class="gallery-grid" id="mainGallery">
-        <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1c6c0ee3d0f8ad6b0e0f8b2a21f8e6ef" alt="family1" class="gItem">
-        <img src="https://images.unsplash.com/photo-1519817650390-64a93db511aa?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=7f5b2a2b6a0e0f3b5cbc9d5eea3d5a3f" alt="family2" class="gItem">
-        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=a9b79d0c2f9fb9f1f9d1e8b7c8c2d3b1" alt="family3" class="gItem">
-        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=2d1a9a3c6b4c7b0e9ad5b1f6bcf16b7d" alt="family4" class="gItem">
-        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f69f6a5a9c3c7b6c6a4f4d6b2a1f708" alt="family5" class="gItem">
+    <!-- Gallery Section (Pinterest Style) -->
+    <section id="gallery" style="margin-top:100px;">
+      <div class="section-header">
+        <h2>Travel Gallery</h2>
+        <p>Real moments from our recent trips captured by travelers.</p>
+      </div>
+      <div class="gallery-masonry" id="mainGallery">
+        <!-- Images injected via JS -->
       </div>
     </section>
 
-    <!-- About -->
-    <section id="about" style="margin-top:40px">
-      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
-        <div style="flex:1;min-width:260px">
-          <h2>About Kesari-style Tours</h2>
-          <p>Inspired by premium tour operators, our agency focuses on curated, reliable travel experiences across India and internationally. We combine vetted hotels, experienced local guides, comfortable transfers and flexible itineraries to make every trip memorable for families, couples and groups.</p>
+    <!-- About Section -->
+    <section id="about">
+      <div class="about-container">
+        <div class="about-text">
+          <h2>We Craft Memories, Not Just Trips</h2>
+          <p>Founded with a passion for exploration, "Tourism" has grown into a premium travel agency dedicated to seamless experiences. Whether you are 8 or 80, we believe travel should be comfortable, safe, and inspiring.</p>
+          <p>We specialize in customized itineraries that blend luxury with local authenticity. Our "Senior Special" groups are renowned for their care and attention to detail, ensuring the elderly can travel the world with dignity and joy.</p>
+          
+          <ul class="about-features">
+            <li><i class="fa-solid fa-check-circle"></i> 24/7 On-Trip Support</li>
+            <li><i class="fa-solid fa-check-circle"></i> Vetted Premium Hotels</li>
+            <li><i class="fa-solid fa-check-circle"></i> Visa & Forex Assistance</li>
+            <li><i class="fa-solid fa-check-circle"></i> Senior-Friendly Transport</li>
+            <li><i class="fa-solid fa-check-circle"></i> Local Authentic Food</li>
+            <li><i class="fa-solid fa-check-circle"></i> Experienced Guides</li>
+          </ul>
         </div>
-        <div style="flex:0 0 420px">
-          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f69f6a5a9c3c7b6c6a4f4d6b2a1f708" style="width:100%;border-radius:10px" alt="About">
+        <div class="about-img">
+          <!-- Professional travel agent/guide image -->
+          <img src="https://images.unsplash.com/photo-1512100356356-de1b84283e18?q=80&w=1975&auto=format&fit=crop" alt="Travel Agency">
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- FOOTER -->
-  <footer id="contact" aria-label="Footer">
-    <div class="container footer-group">
-      <div>
-        <h4 style="color:#fff;margin-bottom:8px">Contacts</h4>
-        <p style="color:#ddd">Email: example@gmail.com</p>
-        <p style="color:#ddd">Phone: +91 95297 30330</p>
-        <div class="footer-icons">
-          <a href="mailto:example@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
-          <a href="tel:+919529730330" title="Call"><i class="fa-solid fa-phone"></i></a>
-          <a href="https://wa.me/919529730330?text=Welcome%20to%20our%20Tourism%20Website!%20How%20can%20I%20help%20you?" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-col">
+        <div class="logo" style="margin-bottom:15px">Tourism.</div>
+        <p style="color:#bdc3c7;line-height:1.8">Your trusted partner for exploring India and beyond. We bring the world closer to you.</p>
+        <div class="social-icons" style="margin-top:20px">
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
         </div>
       </div>
 
-      <div class="map-card" aria-hidden="false">
-        <h4 style="margin-bottom:8px">Map — Pimple Saudagar</h4>
-        <div class="map-canvas" role="img" aria-label="Map showing Pimple Saudagar location">
-          <svg viewBox="0 0 400 220" style="width:100%;height:100%;display:block">
-            <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#FFD166"/><stop offset="1" stop-color="#FB7B6C"/></linearGradient></defs>
-            <g class="path-anim" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M40 170 C90 120 150 110 200 90 C260 70 320 70 360 40" stroke="url(#g)" stroke-width="3" fill="none" />
-            </g>
-          </svg>
-          <div class="map-marker" title="Pimple Saudagar"></div>
+      <div class="footer-col footer-links">
+        <h4>Contact Us</h4>
+        <p><i class="fa-solid fa-envelope" style="color:#F8C308;margin-right:10px"></i> booking@tourism.com</p>
+        <p><i class="fa-solid fa-phone" style="color:#F8C308;margin-right:10px"></i> +91 95297 30330</p>
+        <p><i class="fa-solid fa-location-dot" style="color:#F8C308;margin-right:10px"></i> Pimple Saudagar, Pune</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Visit Our Office</h4>
+        <div class="map-card">
+          <div class="map-canvas">
+            <div style="color:#777;font-size:0.8rem">Google Map Loading...</div>
+            <div class="map-marker"></div>
+          </div>
+          <a href="https://maps.google.com" target="_blank" style="display:block;margin-top:10px;color:#F8C308;font-size:0.9rem">Get Directions &rarr;</a>
         </div>
-        <p style="margin-top:8px;color:#ddd">Pimple Saudagar — Pune suburb. Click <a href="https://www.google.com/maps/dir//Pimple+Saudagar" target="_blank" style="color:#FFD166">Get directions</a></p>
       </div>
     </div>
   </footer>
 
-  <!-- Floating WhatsApp (main) -->
-  <a id="fabWhatsApp" class="fab-whatsapp" href="https://wa.me/919529730330?text=Welcome%20to%20our%20Tourism%20Website!%20How%20can%20I%20help%20you?" target="_blank" aria-label="Chat on WhatsApp">
-    <i class="fa-brands fa-whatsapp" style="font-size:20px"></i>
-  </a>
+  <!-- Floating WA -->
+  <a href="https://wa.me/919529730330" class="fab-wa" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
-  <!-- Lightbox modal -->
-  <div id="lightbox" class="modal-backdrop" style="display:none;align-items:center;justify-content:center;z-index:1400">
-    <div class="modal" style="background:transparent;box-shadow:none;padding:0;max-width:95%">
-      <img id="lightboxImg" src="" alt="Expanded" style="width:100%;border-radius:8px;display:block">
+  <!-- MODALS -->
+  
+  <!-- City Search Modal -->
+  <div class="modal-backdrop" id="searchModal">
+    <div class="modal" style="max-width:500px">
+      <i class="fa-solid fa-xmark close-modal" id="closeSearch"></i>
+      <h3>Select Destination</h3>
+      <input type="text" id="searchInput" placeholder="Type a city name..." style="background:#f0f0f0;padding:12px;border-radius:6px;margin-top:10px">
+      <div class="city-list" id="cityList"></div>
     </div>
   </div>
 
-  <!-- ---------------- SCRIPTS (DATA + BEHAVIOR) ---------------- -->
+  <!-- City Details Modal -->
+  <div class="modal-backdrop" id="detailsModal">
+    <div class="modal">
+      <i class="fa-solid fa-xmark close-modal" id="closeDetails"></i>
+      <div id="detailsContent"></div>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div class="modal-backdrop" id="contactModal">
+    <div class="modal" style="max-width:600px">
+      <i class="fa-solid fa-xmark close-modal" id="closeContact"></i>
+      <h3>Connect with Local Guides</h3>
+      <p style="margin-bottom:15px;color:#666">Select a guide to chat on WhatsApp immediately.</p>
+      <div class="contact-grid" id="contactGrid"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="modal-backdrop" id="lightbox" style="z-index:3000;background:rgba(0,0,0,0.9)">
+    <img id="lightboxImg" src="" style="max-width:90%;max-height:90vh;border-radius:5px;box-shadow:0 0 30px rgba(0,0,0,0.5)">
+    <i class="fa-solid fa-xmark close-modal" style="color:#fff;top:30px;right:30px" id="closeLightbox"></i>
+  </div>
+
   <script>
   (function(){
-    // ========== Dummy city data (10 cities). Images use Unsplash/postimg/picsum for quality.
-    const citiesData = {
-      mumbai: {
-        key:'mumbai', name:"Mumbai",
-        desc:"Financial & entertainment capital — Marine Drive, Gateway of India, Victorian architecture, vibrant street food.",
-        mainImg:"https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1a3b1b88c1f6a5b0e2b9a4b2f7e2c7d1",
-        gallery:[
-          "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1a3b1b88c1f6a5b0e2b9a4b2f7e2c7d1",
-          "https://images.unsplash.com/photo-1505691723518-36a7b2b2f7b0?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c"
+    // ================= DATA =================
+    // High quality Unsplash images used
+    const data = {
+      seniors: {
+        name: "Senior Citizens Group",
+        desc: "A specially curated 'Slow & Steady' vacation for the young at heart. Includes medical support, nostalgia evenings, card games, and zero-rush sightseeing.",
+        img: "https://images.unsplash.com/photo-1534125950882-72c72b8c9d41?q=80&w=1600", // Happy seniors
+        isSpecial: true,
+        gallery: [
+          "https://images.unsplash.com/photo-1552063920-c20536c4b9d5?q=80&w=1600", // Group laughing
+          "https://images.unsplash.com/photo-1516724562728-afc824a36e84?q=80&w=1600", // Happy couple
+          "https://images.unsplash.com/photo-1528643194098-b8a7d3c010c7?q=80&w=1600", // Playing cards (concept)
+          "https://images.unsplash.com/photo-1574709193635-f09c04d0b04c?q=80&w=1600", // Cheers
+          "https://images.unsplash.com/photo-1478051664165-8120b41198f1?q=80&w=1600", // Walking nature
+          "https://images.unsplash.com/photo-1581579438747-104c53d7fbc4?q=80&w=1600"  // Selfie
         ],
-        plans:[
-          {id:1,title:"Mumbai Darshan — 2D/1N",price:"₹4,999",details:"City highlights + Gateway + optional ferry"},
-          {id:2,title:"Mumbai Family — 3D/2N",price:"₹8,999",details:"City + cultural food walk"}
+        plans: [
+          {title: "Golden Goa Retreat (5D)", price: "₹18,500", info: "Resort stay, old songs night, beach walk."},
+          {title: "Spiritual Kashi (3D)", price: "₹14,000", info: "VIP Darshan, Ganga Aarti from boat."},
+          {title: "Coorg Plantation Stay (4D)", price: "₹16,500", info: "Coffee tasting, mild weather, relaxation."}
         ],
-        locals:[
-          {name:"Ravi (Mumbai)",phone:"9529730331"},
-          {name:"Asha (Mumbai)",phone:"9529730332"}
+        guides: [
+          {name: "Dr. Sharma (Medic)", phone: "919529730331"},
+          {name: "Mr. Deshmukh (Manager)", phone: "919529730332"}
         ]
+      },
+      mumbai: {
+        name: "Mumbai",
+        desc: "The city of dreams. Experience the Victorian architecture of South Bombay, the breeze of Marine Drive, and the bustling energy of Colaba Causeway.",
+        img: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?q=80&w=1600", // Gateway of India
+        gallery: ["https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=1600", "https://images.unsplash.com/photo-1567157577867-05ccb1388e66?q=80&w=1600"],
+        plans: [
+          {title: "Mumbai Darshan (2D)", price: "₹5,500", info: "Gateway, Elephanta Caves, Chowpatty."},
+          {title: "Bollywood Tour (1D)", price: "₹3,500", info: "Film city tour + Studio visit."}
+        ],
+        guides: [{name: "Ravi", phone: "919529730333"}]
       },
       delhi: {
-        key:'delhi', name:"Delhi",
-        desc:"Capital city with rich history — Red Fort, Qutub Minar, bustling bazaars and fine dining.",
-        mainImg:"https://images.unsplash.com/photo-1508057198894-247b23fe5ade?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=9b3d9f84c0a2a4c5d6e7f8a9b0c1d2e3",
-        gallery:[
-          "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=9b3d9f84c0a2a4c5d6e7f8a9b0c1d2e3",
-          "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=3b1f2f3d4e5c6b7a8f9e0d1c2b3a4f5d"
+        name: "Delhi",
+        desc: "A blend of ancient history and modern chaos. Visit the majestic Red Fort, Humayun's Tomb, and enjoy the famous street food of Chandni Chowk.",
+        img: "https://images.unsplash.com/photo-1587474260584-136574528ed5?q=80&w=1600", // India Gate/Humayun
+        gallery: ["https://images.unsplash.com/photo-1595349090606-d7072f7a08b6?q=80&w=1600", "https://images.unsplash.com/photo-1515091643051-48b475d2570b?q=80&w=1600"],
+        plans: [
+          {title: "Delhi Heritage (2D)", price: "₹6,000", info: "Qutub Minar, Lotus Temple, Old Delhi Rickshaw."},
+          {title: "Golden Triangle (4D)", price: "₹15,000", info: "Delhi + Agra + Jaipur."}
         ],
-        plans:[
-          {id:1,title:"Delhi Heritage — 2D/1N",price:"₹7,999",details:"Historical walk & monuments"},
-          {id:2,title:"Delhi + Agra — 3D/2N",price:"₹12,999",details:"Includes Taj Mahal day trip"}
-        ],
-        locals:[
-          {name:"Priya (Delhi)",phone:"9529730333"},
-          {name:"Anil (Delhi)",phone:"9529730334"}
-        ]
-      },
-      bengaluru: {
-        key:'bengaluru', name:"Bengaluru",
-        desc:"Garden city & IT hub — parks, cafes, nearby hill escapes.",
-        mainImg:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=4d0f6b8e2f1c3b2a6a8e7d4c9b0a2d1b",
-        gallery:["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=4d0f6b8e2f1c3b2a6a8e7d4c9b0a2d1b"],
-        plans:[{id:1,title:"Bengaluru Day — 1D",price:"₹3,999",details:"City & gardens"}],
-        locals:[{name:"Kiran (Bengaluru)",phone:"9529730335"}]
-      },
-      hyderabad: {
-        key:'hyderabad', name:"Hyderabad",
-        desc:"Historic city — Charminar, Golconda Fort and famous biryani.",
-        mainImg:"https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=5a1b7d8c9f2e3d4c6b7a8e9f0c1d2e3f",
-        gallery:["https://images.unsplash.com/photo-1499346030926-9a72daac6c63?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=5a1b7d8c9f2e3d4c6b7a8e9f0c1d2e3f"],
-        plans:[{id:1,title:"Hyderabad — 2D/1N",price:"₹8,999",details:"Monuments & cuisine"}],
-        locals:[{name:"Imran (Hyderabad)",phone:"9529730336"}]
-      },
-      chennai: {
-        key:'chennai', name:"Chennai",
-        desc:"Coastal metropolis — temples and Marina beach.",
-        mainImg:"https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=ad6d1f6a2a1b6fce5b3c1d4f7e6a9b0c",
-        gallery:["https://images.unsplash.com/photo-1467269204594-9661b134dd2b?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=ad6d1f6a2a1b6fce5b3c1d4f7e6a9b0c"],
-        plans:[{id:1,title:"Chennai — 1D",price:"₹3,499",details:"Temples & beach"}],
-        locals:[{name:"Arun (Chennai)",phone:"9529730337"}]
-      },
-      pune: {
-        key:'pune', name:"Pune",
-        desc:"Cultural & educational hub near hill stations — cafes, forts and heritage.",
-        mainImg:"https://images.unsplash.com/photo-1544012526-9f7d3d7de9c2?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d",
-        gallery:["https://images.unsplash.com/photo-1544012526-9f7d3d7de9c2?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d","https://images.unsplash.com/photo-1568495248636-6432bb0a7df2?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=7f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c"],
-        plans:[
-          {id:1,title:"Pune City — 1D",price:"₹2,499",details:"Historical places & food walk"},
-          {id:2,title:"Pune + Lonavala — 2D/1N",price:"₹5,999",details:"Hill station getaway"},
-          {id:3,title:"Pune Family — 3D/2N",price:"₹9,499",details:"Family-friendly activities & stays"}
-        ],
-        locals:[
-          {name:"Kiran (Pune)",phone:"9529730330"},
-          {name:"Seema (Pune)",phone:"9529730338"}
-        ]
-      },
-      kolkata: {
-        key:'kolkata', name:"Kolkata",
-        desc:"City of Joy — colonial architecture, sweets and cultural hubs.",
-        mainImg:"https://images.unsplash.com/photo-1525959657015-79c3a3a8f6d0?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1d2c3b4a5f6e7d8c9a0b1c2d3e4f5a6b",
-        gallery:["https://images.unsplash.com/photo-1525959657015-79c3a3a8f6d0?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1d2c3b4a5f6e7d8c9a0b1c2d3e4f5a6b"],
-        plans:[{id:1,title:"Kolkata Heritage — 2D",price:"₹5,999",details:"Culture & food"}],
-        locals:[{name:"Suman (Kolkata)",phone:"9529730339"}]
-      },
-      jaipur: {
-        key:'jaipur', name:"Jaipur",
-        desc:"Pink City — forts, palaces, and royal history.",
-        mainImg:"https://i.postimg.cc/cJtbV9qK/jaipur.jpg", // postimg for high-quality
-        gallery:["https://picsum.photos/seed/jpr1/900/600","https://picsum.photos/seed/jpr2/900/600"],
-        plans:[{id:1,title:"Jaipur Royal — 2D/1N",price:"₹6,499",details:"Forts & palaces"}],
-        locals:[{name:"Gita (Jaipur)",phone:"9529730340"}]
-      },
-      ahmedabad: {
-        key:'ahmedabad', name:"Ahmedabad",
-        desc:"Historic city — Sabarmati riverfront and rich textile heritage.",
-        mainImg:"https://images.unsplash.com/photo-1594679625092-2f6b3f4d5507?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=6a1b2c3d4e5f6b7a8c9d0e1f2a3b4c5d",
-        gallery:["https://images.unsplash.com/photo-1594679625092-2f6b3f4d5507?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=6a1b2c3d4e5f6b7a8c9d0e1f2a3b4c5d"],
-        plans:[{id:1,title:"Ahmedabad — 2D",price:"₹6,299",details:"Heritage & local tours"}],
-        locals:[{name:"Hiren (Ahmedabad)",phone:"9529730341"}]
+        guides: [{name: "Amit", phone: "919529730334"}]
       },
       goa: {
-        key:'goa', name:"Goa",
-        desc:"Beach paradise — sun, sand, watersports and nightlife.",
-        mainImg:"https://i.postimg.cc/0N8Qpwny/goa.jpg",
-        gallery:["https://picsum.photos/seed/goa1/900/600","https://picsum.photos/seed/goa2/900/600"],
-        plans:[
-          {id:1,title:"Goa Fun — 4N/5D",price:"₹18,500",details:"Beaches & watersports"},
-          {id:2,title:"Goa Family — 3N/4D",price:"₹14,999",details:"Relaxed family holiday"}
+        name: "Goa",
+        desc: "Sun, sand, and serenity. From the party vibes of Baga to the quiet heritage of Old Goa churches, discover the Portuguese legacy.",
+        img: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=1600", // Goa beach
+        gallery: ["https://images.unsplash.com/photo-1543501062-0e9e1c2d686f?q=80&w=1600", "https://images.unsplash.com/photo-1590393766289-4b68e59e211b?q=80&w=1600"],
+        plans: [
+          {title: "North Goa Party (3D)", price: "₹12,000", info: "Clubs, Watersports, Night Markets."},
+          {title: "South Goa Chill (4D)", price: "₹14,000", info: "Private beach resort, Dudhsagar falls."}
         ],
-        locals:[{name:"Rafael (Goa)",phone:"9529730342"}]
+        guides: [{name: "Roshan", phone: "919529730335"}]
+      },
+      jaipur: {
+        name: "Jaipur",
+        desc: "The Pink City. Immerse yourself in royal grandeur with Amber Fort, Hawa Mahal, and authentic Rajasthani Thali.",
+        img: "https://images.unsplash.com/photo-1477587458883-47145ed94245?q=80&w=1600", // Hawa Mahal
+        gallery: ["https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=1600", "https://images.unsplash.com/photo-1524230507669-5ff97982bb5e?q=80&w=1600"],
+        plans: [
+          {title: "Royal Jaipur (3D)", price: "₹9,000", info: "Forts, Palaces, Chokhi Dhani dinner."},
+        ],
+        guides: [{name: "Vikram", phone: "919529730336"}]
+      },
+      kerala: {
+        name: "Kerala",
+        desc: "God's Own Country. Houseboats in Alleppey, tea gardens in Munnar, and pristine beaches in Varkala.",
+        img: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=1600", // Kerala Backwaters
+        gallery: ["https://images.unsplash.com/photo-1593693397690-362cb9666fc2?q=80&w=1600", "https://images.unsplash.com/photo-1583134372986-77d079cd5756?q=80&w=1600"],
+        plans: [
+          {title: "Kerala Bliss (5D)", price: "₹22,000", info: "Munnar + Thekkady + Houseboat."},
+        ],
+        guides: [{name: "Deepak", phone: "919529730337"}]
+      },
+      ladakh: {
+        name: "Ladakh",
+        desc: "The land of high passes. Pangong Lake, monasteries, and rugged mountains await the adventurous soul.",
+        img: "https://images.unsplash.com/photo-1581793434119-944dd80a402f?q=80&w=1600", // Ladakh
+        gallery: ["https://images.unsplash.com/photo-1549646271-9c3f8510c439?q=80&w=1600"],
+        plans: [{title: "Ladakh Bike Trip (7D)", price: "₹28,000", info: "Leh, Nubra, Pangong."}],
+        guides: [{name: "Tenzin", phone: "919529730338"}]
       }
     };
 
-    // ---------- DOM refs ----------
+    // Pinterest-style gallery images (Real Aesthetic)
+    const galleryImages = [
+      "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?q=80&w=600", // Nature
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600", // Food
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=600", // Travel Van
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600", // Beach
+      "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?q=80&w=600", // Venice/Canal
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=600", // Mountains
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=600", // Santorini
+      "https://images.unsplash.com/photo-1530789253388-582c481c54b0?q=80&w=600"  // Culture
+    ];
+
+    // ================= LOGIC =================
+
     const toursGrid = document.getElementById('toursGrid');
-    const infoBanner = document.getElementById('infoBanner');
-    const cityModal = document.getElementById('cityModal');
+    const mainGallery = document.getElementById('mainGallery');
+    const detailsModal = document.getElementById('detailsModal');
+    const detailsContent = document.getElementById('detailsContent');
+    const contactModal = document.getElementById('contactModal');
+    const contactGrid = document.getElementById('contactGrid');
+    const searchModal = document.getElementById('searchModal');
     const cityList = document.getElementById('cityList');
-    const citySearchInput = document.getElementById('citySearchInput');
-    const closeCityModal = document.getElementById('closeCityModal');
-    const contactsModal = document.getElementById('contactsModal');
-    const contactsGrid = document.getElementById('contactsGrid');
-    const closeContacts = document.getElementById('closeContacts');
-    const contactLocalLink = document.getElementById('contactLocalLink');
-    const cityDetailsModal = document.getElementById('cityDetailsModal');
-    const closeCityDetails = document.getElementById('closeCityDetails');
-    const cityTitleModal = document.getElementById('cityTitleModal');
-    const cityMainImgModal = document.getElementById('cityMainImgModal');
-    const cityInfoModal = document.getElementById('cityInfoModal');
-    const cityGalleryModal = document.getElementById('cityGalleryModal');
-    const startLocationSelect = document.getElementById('startLocationSelect');
-    const searchBtn = document.getElementById('searchBtn');
-    const arrivalDate = document.getElementById('arrivalDate');
-    const departureDate = document.getElementById('departureDate');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-
-    // ---------- helper: render grid ----------
-    function renderToursGrid(filterKey){
+    
+    // 1. Render Tours
+    function renderTours(){
       toursGrid.innerHTML = '';
-      Object.keys(citiesData).forEach(key=>{
-        const c = citiesData[key];
-        if (!filterKey || key === filterKey || c.name.toLowerCase().includes(filterKey)){
-          const card = document.createElement('article');
-          card.className = 'tour-card';
-          card.setAttribute('data-key', key);
-          card.innerHTML = `
-            <img src="${c.mainImg}" alt="${c.name}">
-            <div class="card-body">
-              <h3>${c.name}</h3>
-              <p>${c.desc}</p>
-            </div>
-          `;
-          card.addEventListener('click', ()=> openCityDetails(key));
-          card.tabIndex = 0;
-          card.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') openCityDetails(key); });
-          toursGrid.appendChild(card);
-        }
+      Object.keys(data).forEach(key => {
+        const item = data[key];
+        const card = document.createElement('div');
+        card.className = 'tour-card';
+        card.onclick = () => openDetails(key);
+        
+        let badge = item.isSpecial ? '<div class="badge-special">Top Rated</div>' : '';
+        
+        card.innerHTML = `
+          ${badge}
+          <div class="tour-card-img">
+            <img src="${item.img}" alt="${item.name}">
+          </div>
+          <div class="tour-card-body">
+            <h3>${item.name}</h3>
+            <p>${item.desc}</p>
+          </div>
+        `;
+        toursGrid.appendChild(card);
       });
     }
-    renderToursGrid();
 
-    // ---------- city list render for modal ----------
-    function renderCityList(filter=''){
-      cityList.innerHTML = '';
-      const f = (filter||'').trim().toLowerCase();
-      Object.keys(citiesData).forEach(k=>{
-        const c = citiesData[k];
-        if (!f || c.name.toLowerCase().includes(f) || k.includes(f)){
-          const item = document.createElement('div');
-          item.className = 'city-item';
-          item.textContent = c.name;
-          item.setAttribute('data-key', k);
-          item.tabIndex = 0;
-          item.addEventListener('click', ()=> { openCityDetails(k); closeModal(cityModal); });
-          item.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') { openCityDetails(k); closeModal(cityModal); }});
-          cityList.appendChild(item);
-        }
-      });
-      if (!cityList.innerHTML) cityList.innerHTML = '<div style="grid-column:1/-1;padding:10px;color:#666">No cities found</div>';
+    // 2. Render Main Gallery
+    function renderGallery(){
+      mainGallery.innerHTML = galleryImages.map(url => `
+        <div class="g-item" onclick="openLightbox('${url}')">
+          <img src="${url}" loading="lazy">
+        </div>
+      `).join('');
     }
-    renderCityList();
 
-    // ---------- open/close modal helpers ----------
-    function openModal(mod){ mod.style.display = 'flex'; mod.setAttribute('aria-hidden','false'); }
-    function closeModal(mod){ mod.style.display = 'none'; mod.setAttribute('aria-hidden','true'); }
+    // 3. Open Details Modal
+    window.openDetails = function(key){
+      const item = data[key];
+      if(!item) return;
 
-    closeCityModal.addEventListener('click', ()=> closeModal(cityModal));
-    closeContacts.addEventListener('click', ()=> closeModal(contactsModal));
-    closeCityDetails.addEventListener('click', ()=> closeModal(cityDetailsModal));
+      const galleryHTML = item.gallery.map(url => 
+        `<img src="${url}" onclick="openLightbox('${url}')">`
+      ).join('');
 
-    // close on backdrop click
-    [cityModal, contactsModal, cityDetailsModal, lightbox].forEach(mod=>{
-      mod.addEventListener('click', function(e){
-        if (e.target === mod) closeModal(mod);
-      });
-    });
+      const plansHTML = item.plans.map(p => `
+        <div class="plan-card">
+          <div style="display:flex;justify-content:space-between">
+            <h5>${p.title}</h5>
+            <div class="plan-price">${p.price}</div>
+          </div>
+          <p style="font-size:0.9rem;color:#666">${p.info}</p>
+          <button class="btn-search" style="padding:8px 15px;font-size:0.8rem;margin-top:8px" 
+            onclick="bookWa('${item.name}','${p.title}')">Book Now</button>
+        </div>
+      `).join('');
 
-    // ---------- contact locals ----------
-    contactLocalLink.addEventListener('click', function(e){
+      detailsContent.innerHTML = `
+        <div class="city-details-grid">
+          <div class="city-modal-img">
+            <img src="${item.img}" alt="${item.name}">
+            <div class="city-gallery-grid">${galleryHTML}</div>
+          </div>
+          <div>
+            <h2 style="font-size:2rem;margin-bottom:10px">${item.name}</h2>
+            <p style="margin-bottom:20px;color:#555">${item.desc}</p>
+            <h4 style="margin-bottom:15px">Available Packages</h4>
+            ${plansHTML}
+          </div>
+        </div>
+      `;
+      openMod(detailsModal);
+    };
+
+    // 4. Contact Modal Logic
+    document.getElementById('navContact').onclick = (e) => {
       e.preventDefault();
-      renderContacts();
-      openModal(contactsModal);
-    });
-
-    function renderContacts(){
-      contactsGrid.innerHTML = '';
-      Object.keys(citiesData).forEach(k=>{
-        const c = citiesData[k];
-        c.locals.forEach(local=>{
-          const card = document.createElement('div');
-          card.className = 'contact-card';
-          card.innerHTML = `
-            <h4>${local.name}</h4>
-            <div>City: <strong>${c.name}</strong></div>
-            <div class="phone">${local.phone}</div>
-            <div style="margin-top:8px">
-              <button class="btn-chat" data-phone="${local.phone}" data-name="${local.name}" data-city="${c.name}"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</button>
+      contactGrid.innerHTML = '';
+      Object.keys(data).forEach(key => {
+        data[key].guides.forEach(g => {
+          contactGrid.innerHTML += `
+            <div class="contact-card">
+              <div style="font-weight:700;font-size:1.1rem">${g.name}</div>
+              <div style="color:#777;font-size:0.9rem;margin-bottom:5px">Expert in: ${data[key].name}</div>
+              <a href="https://wa.me/${g.phone}" target="_blank" class="btn-wa">
+                <i class="fa-brands fa-whatsapp"></i> Chat
+              </a>
             </div>
           `;
-          card.querySelector('.btn-chat').addEventListener('click', function(){
-            const phone = this.dataset.phone.replace(/\D/g,'');
-            const name = this.dataset.name;
-            const cityName = this.dataset.city;
-            const text = encodeURIComponent(`Hi ${name}, I need local assistance in ${cityName}.`);
-            window.open(`https://wa.me/91${phone}?text=${text}`, '_blank');
-          });
-          contactsGrid.appendChild(card);
         });
       });
-    }
+      openMod(contactModal);
+    };
 
-    // ---------- open city details modal ----------
-    function openCityDetails(key){
-      const city = citiesData[key];
-      if (!city) return;
-      cityTitleModal.textContent = city.name;
-      cityMainImgModal.innerHTML = `<img src="${city.mainImg}" alt="${city.name}" style="width:100%;height:300px;object-fit:cover;border-radius:8px">`;
-      cityInfoModal.innerHTML = `<p>${city.desc}</p>`;
-
-      // plans
-      const plansContainer = document.createElement('div');
-      plansContainer.className = 'plans';
-      city.plans.forEach(p=>{
-        const div = document.createElement('div');
-        div.className = 'plan';
-        div.innerHTML = `<h4>${p.title}</h4><p style="color:#555">${p.details}</p><div class="price">${p.price}</div>
-         <button class="btn-book" data-city="${key}" data-plan="${encodeURIComponent(p.title)}">Book Trip</button>`;
-        plansContainer.appendChild(div);
-      });
-      cityInfoModal.appendChild(plansContainer);
-
-      // gallery
-      cityGalleryModal.innerHTML = '';
-      city.gallery.forEach(src=>{
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = city.name;
-        img.style.borderRadius = '8px';
-        img.style.cursor = 'pointer';
-        img.addEventListener('click', ()=> openLightbox(src));
-        cityGalleryModal.appendChild(img);
-      });
-
-      // attach booking handlers
-      cityInfoModal.querySelectorAll('.btn-book').forEach(btn=>{
-        btn.addEventListener('click', function(){
-          const cityKey = this.dataset.city;
-          const plan = decodeURIComponent(this.dataset.plan);
-          openWhatsAppBooking(cityKey, plan);
-        });
-      });
-
-      openModal(cityDetailsModal);
-    }
-
-    // ---------- booking opens WhatsApp to main business number ----------
-    function openWhatsAppBooking(cityKey, planTitle){
-      const city = citiesData[cityKey];
-      const phone = '9529730330'; // main business number
-      const arr = arrivalDate.value || 'TBD';
-      const dep = departureDate.value || 'TBD';
-      const trav = document.getElementById('travelers').value || 'TBD';
-      const text = encodeURIComponent(`Hello, I want to book: ${planTitle} in ${city.name}. Arrival: ${arr}, Departure: ${dep}, Travelers: ${trav}.`);
-      window.open(`https://wa.me/91${phone}?text=${text}`, '_blank');
-    }
-
-    // ---------- lightbox ----------
-    function openLightbox(src){
-      lightbox.style.display = 'flex'; lightbox.setAttribute('aria-hidden','false'); lightboxImg.src = src;
-    }
-    lightbox.addEventListener('click', function(){ lightbox.style.display = 'none'; lightbox.setAttribute('aria-hidden','true'); lightboxImg.src = ''; });
-
-    // attach gallery images
-    document.querySelectorAll('.gItem').forEach(img=>{
-      img.style.cursor = 'pointer';
-      img.addEventListener('click', ()=> openLightbox(img.src));
-    });
-
-    // ---------- start location select: auto open city -->
-    startLocationSelect.addEventListener('change', function(){
-      const val = this.value;
-      if (val) openCityDetails(val);
-    });
-
-    // ---------- search button open city modal ----------
-    searchBtn.addEventListener('click', function(){
-      renderCityList();
-      openModal(cityModal);
-      citySearchInput.focus();
-    });
-    citySearchInput.addEventListener('input', ()=> renderCityList(citySearchInput.value));
-
-    // ---------- date validation ----------
-    arrivalDate.addEventListener('change', ()=>{ if (departureDate.value && departureDate.value < arrivalDate.value) departureDate.value = arrivalDate.value; });
-    departureDate.addEventListener('change', ()=>{ if (arrivalDate.value && departureDate.value < arrivalDate.value) departureDate.value = arrivalDate.value; });
-
-    // ---------- clear location ----------
-    document.getElementById('clear-location').addEventListener('click', ()=>{
-      startLocationSelect.value = 'mumbai';
-    });
-
-    // ---------- keyboard escapes ----------
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape'){
-        [cityModal, contactsModal, cityDetailsModal, lightbox].forEach(m=>{ if (m.style.display === 'flex') closeModal(m); });
+    // 5. Search Logic
+    document.getElementById('btnSearch').onclick = () => {
+      const val = document.getElementById('destSelect').value;
+      if(val && data[val]) openDetails(val);
+      else {
+        // Show list
+        cityList.innerHTML = Object.keys(data).map(k => 
+          `<div class="city-list-item" onclick="openDetails('${k}'); closeMod(searchModal)">${data[k].name}</div>`
+        ).join('');
+        openMod(searchModal);
       }
+    };
+    
+    // Booking Helper
+    window.bookWa = function(dest, plan){
+      const date = document.getElementById('dateInput').value || "Not decided";
+      const ppl = document.getElementById('travelerSelect').value;
+      const text = `Hi, I want to book: ${plan} in ${dest}. Date: ${date}, Group: ${ppl}`;
+      window.open(`https://wa.me/919529730330?text=${encodeURIComponent(text)}`, '_blank');
+    };
+
+    // Modal Helpers
+    const openMod = (m) => { m.style.display = 'flex'; setTimeout(()=>m.classList.add('active'),10); };
+    const closeMod = (m) => { m.classList.remove('active'); setTimeout(()=>m.style.display='none',300); };
+    
+    // Close events
+    document.getElementById('closeDetails').onclick = () => closeMod(detailsModal);
+    document.getElementById('closeContact').onclick = () => closeMod(contactModal);
+    document.getElementById('closeSearch').onclick = () => closeMod(searchModal);
+    document.getElementById('closeLightbox').onclick = () => closeMod(document.getElementById('lightbox'));
+
+    // Lightbox
+    window.openLightbox = (url) => {
+      document.getElementById('lightboxImg').src = url;
+      openMod(document.getElementById('lightbox'));
+    };
+
+    // Close on backdrop click
+    document.querySelectorAll('.modal-backdrop').forEach(b => {
+      b.onclick = (e) => { if(e.target === b) closeMod(b); }
     });
 
-    // ---------- small a11y styles for focus ----------
-    const style = document.createElement('style');
-    style.textContent = '.city-item:focus{outline:3px solid rgba(248,195,8,.8);outline-offset:2px} .tour-card:focus{outline:3px solid rgba(37,211,102,.8)}';
-    document.head.appendChild(style);
+    // Mobile Nav
+    const navToggle = document.getElementById('navToggle');
+    navToggle.onclick = () => {
+      const ul = document.querySelector('.navBar ul');
+      ul.style.display = ul.style.display === 'flex' ? 'none' : 'flex';
+      ul.style.flexDirection = 'column';
+      ul.style.position = 'absolute';
+      ul.style.top = '70px';
+      ul.style.right = '20px';
+      ul.style.background = '#333';
+      ul.style.padding = '20px';
+      ul.style.borderRadius = '10px';
+    };
 
-    // ---------- optional: preselect from URL (?city=pune) ----------
-    (function initFromUrl(){
-      try{
-        const url = new URL(window.location.href);
-        const q = url.searchParams.get('city') || window.location.hash.replace('#','');
-        if (q && citiesData[q.toLowerCase()]) openCityDetails(q.toLowerCase());
-      } catch(e){}
-    })();
+    // Init
+    renderTours();
+    renderGallery();
 
   })();
   </script>
