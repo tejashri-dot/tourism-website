@@ -201,12 +201,45 @@
     position: relative; max-height: 90vh; overflow-y: auto; opacity: 0; transform: translateY(50px);
   }
   
-  .fab-wa {
-    position: fixed; bottom: 30px; right: 30px; width: 64px; height: 64px; background: #25D366;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;
-    font-size: 32px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 5000; transition: transform 0.2s;
+  /* --- WHATSAPP ANIMATIONS & STYLES --- */
+  .wa-wrapper {
+    position: fixed; bottom: 30px; right: 30px; z-index: 5000;
+    display: flex; align-items: center; justify-content: center;
+    animation: float-bounce 2.5s ease-in-out infinite;
   }
-  .fab-wa:hover { transform: scale(1.1); }
+  /* Pause animation on hover for easier clicking */
+  .wa-wrapper:hover { animation-play-state: paused; }
+
+  .wa-ripple {
+    position: absolute; width: 100%; height: 100%;
+    background: #25D366; border-radius: 50%;
+    opacity: 0.6; animation: wa-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    z-index: -1;
+  }
+
+  .fab-wa {
+    position: relative; width: 64px; height: 64px; background: #25D366;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 32px; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+    transition: transform 0.3s; text-decoration: none;
+  }
+  .wa-wrapper:hover .fab-wa { transform: scale(1.1); }
+
+  .wa-tooltip {
+    position: absolute; right: 80px; background: #fff; color: #333;
+    padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); opacity: 0; transition: opacity 0.3s;
+    pointer-events: none; white-space: nowrap;
+  }
+  .wa-wrapper:hover .wa-tooltip { opacity: 1; }
+
+  @keyframes float-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  @keyframes wa-ping {
+    75%, 100% { transform: scale(1.6); opacity: 0; }
+  }
 
   /* ---------------- 5. RESPONSIVE ---------------- */
   @media(max-width: 900px) {
@@ -226,6 +259,19 @@
     .btn-search { width: 100%; }
   }
   </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "three": "https://aistudiocdn.com/three@^0.181.2",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "gsap": "https://aistudiocdn.com/gsap@^3.13.0",
+    "gsap/": "https://aistudiocdn.com/gsap@^3.13.0/"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -355,7 +401,14 @@
     </div>
   </footer>
 
-  <a href="https://wa.me/919529730330" class="fab-wa" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+  <!-- BOUNCING WHATSAPP BUTTON -->
+  <div class="wa-wrapper">
+    <div class="wa-ripple"></div>
+    <a href="https://wa.me/919529730330?text=Hello%2C%20welcome%20to%20Tourism.%20I%20am%20interested%20in%20planning%20a%20trip.%20Please%20provide%20further%20details." class="fab-wa" target="_blank">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <span class="wa-tooltip">Chat with us</span>
+  </div>
 
   <!-- MODALS -->
   <div class="modal-backdrop" id="detailsModal">
@@ -518,6 +571,14 @@
         gallery: ["https://images.unsplash.com/photo-1549646271-9c3f8510c439?q=80&w=600"],
         plans: [{title: "Bike Trip", price: "₹25,000", info: "Leh - Nubra"}],
         guides: [{name: "Tenzin", phone: "919529730330"}]
+      },
+      kerala: {
+        name: "Kerala",
+        desc: "God's own country with serene backwaters.",
+        img: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=1600",
+        gallery: ["https://images.unsplash.com/photo-1593693396885-5b589cd5bec1?q=80&w=600"],
+        plans: [{ title: "Houseboat Stay", price: "₹15,000", info: "Alleppey, Munnar Tea Gardens" }],
+        guides: [{ name: "Vinod", phone: "919529730330" }]
       }
     };
 
@@ -577,7 +638,9 @@
     };
 
     window.bookWa = (msg) => {
-        window.open(`https://wa.me/919529730330?text=Booking Inquiry: ${msg}`, '_blank');
+        // Specific message format as requested
+        const fullMsg = `Hello, welcome to Tourism. I am interested in ${msg}. Please have your team call me for further details.`;
+        window.open(`https://wa.me/919529730330?text=${encodeURIComponent(fullMsg)}`, '_blank');
     }
 
     window.openLightbox = (src) => {
@@ -610,7 +673,7 @@
         c.innerHTML = '';
         Object.values(data).forEach(d => {
              d.guides.forEach(g => {
-                c.innerHTML += `<div style="padding:15px;background:#f4f4f4;border-radius:8px"><b>${g.name}</b> <br><small>Expert for ${d.name}</small> <br> <a href="https://wa.me/${g.phone}" style="color:green;font-weight:bold;margin-top:5px;display:inline-block">Chat on WhatsApp</a></div>`;
+                c.innerHTML += `<div style="padding:15px;background:#f4f4f4;border-radius:8px"><b>${g.name}</b> <br><small>Expert for ${d.name}</small> <br> <a href="https://wa.me/${g.phone}?text=${encodeURIComponent(`Hello ${g.name}, I need a guide for ${d.name}.`)}" style="color:green;font-weight:bold;margin-top:5px;display:inline-block">Chat on WhatsApp</a></div>`;
              });
         });
         openMod('contactModal');
