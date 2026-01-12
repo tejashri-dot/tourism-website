@@ -3,7 +3,42 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ganraj Tours & Travels — Connect & Explore</title>
+  
+  <!-- SEO PRIMARY TAGS -->
+  <title>Ganraj Tours & Travels — Best Travel Agency in Pune & Mumbai</title>
+  <meta name="description" content="Book premium domestic and international holiday packages with Ganraj Tours & Travels. Specializing in Ashtavinayak, Kashmir, Kerala, and World Tours from Pune and Mumbai." />
+  <meta name="keywords" content="Ganraj Tours and Travels, Travel Agency in Pune, Travel Agency in Mumbai, Ashtavinayak Yatra, Kerala Tour Packages, Kashmir Tour, International Holiday Packages" />
+  <meta name="author" content="Ganraj Tours & Travels" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://yourdomain.com/" />
+
+  <!-- OPEN GRAPH / FACEBOOK -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ganraj Tours & Travels — Connect & Explore" />
+  <meta property="og:description" content="Your journey, our passion. Explore the world with curated travel packages." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+
+  <!-- GOOGLE SCHEMA (Local Business) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Ganraj Tours & Travels",
+    "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Pimple Saudagar",
+      "addressLocality": "Pimpri-Chinchwad",
+      "addressRegion": "Maharashtra",
+      "postalCode": "411027",
+      "addressCountry": "IN"
+    },
+    "telephone": "+919529730330",
+    "priceRange": "$$",
+    "url": "https://yourdomain.com"
+  }
+  </script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +48,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
 
-  <!-- Libraries (GSAP + Three.js) -->
+  <!-- Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -35,16 +70,8 @@
 
   /* ---------------- 2. HEADER ---------------- */
   header {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    min-height: 100vh;
-    background: #000;
-    z-index: 10;
-    padding-top: 100px;
+    position: relative; width: 100%; display: flex; flex-direction: column; align-items: center;
+    justify-content: flex-end; min-height: 100vh; background: #000; z-index: 10; padding-top: 100px;
   }
   #canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
   .header-bg {
@@ -53,8 +80,7 @@
     background-size: cover; background-position: center; opacity: 0.35; z-index: 0;
   }
   .navBar {
-    position: absolute; top: 0; left: 0; right: 0;
-    display: flex; justify-content: space-between; align-items: center;
+    position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center;
     padding: 25px 40px; z-index: 50;
   }
   .logo { color: #fff; font-weight: 800; font-size: 1.6rem; letter-spacing: 1px; }
@@ -64,7 +90,6 @@
   .navBar a:hover { color: var(--primary); }
   .nav-toggle { display: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
 
-  /* Hero Text */
   .header-section { position: relative; z-index: 10; text-align: center; margin: auto 0; padding-bottom: 50px; }
   .hero-mask { overflow: hidden; display: block; }
   .header-section h1 { color: #fff; font-size: 4.5rem; line-height: 1.1; margin-bottom: 10px; }
@@ -92,62 +117,52 @@
   main { padding-top: 120px; padding-bottom: 60px; }
   .section-header { text-align: center; margin-bottom: 50px; }
   .section-header h2 { font-size: 2.8rem; margin-bottom: 10px; }
-  .section-header p { color: #7f8c8d; }
 
-  /* Dest Grid */
-  .tours-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+  /* Dest Grid Updates */
+  .tours-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
   .tour-card {
     background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     cursor: pointer; transition: 0.4s; position: relative;
   }
-  .tour-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-  .tour-card-img { height: 240px; overflow: hidden; }
+  .tour-card:hover { transform: translateY(-10px); }
+  .tour-card-img { height: 220px; overflow: hidden; position: relative; }
   .tour-card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
-  .tour-card:hover img { transform: scale(1.1); }
   .tour-card-body { padding: 20px; }
+
+  /* NEW: Duration Badge & Icons */
+  .duration-badge {
+    position: absolute; bottom: 12px; left: 12px; background: rgba(0,0,0,0.7);
+    color: #fff; padding: 4px 10px; border-radius: 5px; font-size: 0.75rem; font-weight: 700;
+  }
+  .tour-icons {
+    display: flex; gap: 15px; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;
+  }
+  .icon-item { font-size: 0.75rem; color: #7f8c8d; display: flex; align-items: center; gap: 5px; }
+  .icon-item i { color: var(--primary); }
+
   .badge-special {
     position: absolute; top: 15px; right: 15px; background: var(--primary); color: #000;
     padding: 5px 12px; border-radius: 5px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
   }
 
-  /* Slider Section */
-  .tour-slider { position: relative; height: 75vh; overflow: hidden; margin: 80px 0; border-radius: 20px; }
-  .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: 1s ease; }
-  .slide.active { opacity: 1; }
-  .overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)); }
-  .slide-content { position: relative; max-width: 800px; margin: auto; padding: 100px 20px; color: #fff; text-align: center; }
-  .slide-content h2 { font-size: 3.5rem; margin-bottom: 10px; color: #fff; }
-  .price-tag { color: var(--primary); font-weight: 800; font-size: 1.5rem; }
-
   /* Form Section */
   .enquiry-section { background: #0b0f19; color: #fff; padding: 80px 0; border-radius: 30px; margin: 60px 0; }
-  .form-notification { 
-    background: rgba(248, 195, 8, 0.15); border: 1px solid var(--primary); color: var(--primary);
-    padding: 15px; border-radius: 10px; margin-bottom: 30px; text-align: center; font-weight: 800; letter-spacing: 1px;
-  }
-  .enquiry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
   .enquiry-form { background: #fff; padding: 40px; border-radius: 20px; color: #333; }
-  .enquiry-form input, .enquiry-form select, .enquiry-form textarea {
-    width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Outfit'; font-size: 1rem;
+  .enquiry-form input, .enquiry-form select {
+    width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Outfit';
   }
   .btn-form {
     width: 100%; background: var(--primary); color: #111; border: none; padding: 15px; 
     border-radius: 8px; font-weight: 800; cursor: pointer; text-transform: uppercase;
   }
 
-  /* Footer */
-  footer { background: #111; color: #fff; padding: 80px 0 30px; }
-  .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; }
-  .footer-col h4 { color: var(--primary); margin-bottom: 20px; font-family: 'Outfit'; text-transform: uppercase; }
-  .map-card { height: 200px; border-radius: 10px; overflow: hidden; background: #222; }
-
-  /* WhatsApp */
-  .wa-wrapper { position: fixed; bottom: 30px; right: 30px; z-index: 5000; display: flex; align-items: center; }
+  /* WhatsApp Float */
+  .wa-wrapper { position: fixed; bottom: 30px; right: 30px; z-index: 5000; display: flex; align-items: center; cursor: pointer; }
   .wa-ripple { position: absolute; inset: 0; background: #25D366; border-radius: 50%; animation: wa-ping 1.5s infinite; opacity: 0.6; z-index: -1; }
   .fab-wa { width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
   @keyframes wa-ping { 75%, 100% { transform: scale(1.8); opacity: 0; } }
 
-  /* Modal Styles for City Info */
+  /* Modal */
   .modal-overlay {
     position: fixed; inset: 0; background: rgba(0,0,0,0.85); display: none;
     align-items: center; justify-content: center; z-index: 10000; padding: 20px;
@@ -156,18 +171,105 @@
     background: #fff; width: 100%; max-width: 700px; border-radius: 20px; overflow: hidden;
     position: relative; animation: slideUp 0.4s ease;
   }
-  @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
   .modal-img { height: 300px; width: 100%; object-fit: cover; }
   .modal-body { padding: 30px; }
-  .modal-close { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #fff; cursor: pointer; z-index: 10; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+  .modal-close { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #fff; cursor: pointer; z-index: 10; }
 
   @media(max-width: 900px) {
     .header-section h1 { font-size: 2.8rem; }
     .enquiry-grid { grid-template-columns: 1fr; }
-    .footer-content { grid-template-columns: 1fr; }
     .navBar ul { display: none; }
     .nav-toggle { display: block; }
   }
+  /* ================= FOOTER ================= */
+footer {
+  background: #0b0f19;
+  color: #ccc;
+  padding: 70px 0 40px;
+  margin-top: 80px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.footer-col h3.logo {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.footer-col h3.logo span {
+  color: var(--primary);
+}
+
+.footer-col h4 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.footer-col p {
+  font-size: 0.9rem;
+  color: #aaa;
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+/* Contact icons (optional future use) */
+.footer-col p i {
+  color: var(--primary);
+  margin-right: 8px;
+}
+
+/* Map card */
+.map-card {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.map-card iframe {
+  display: block;
+  filter: grayscale(100%) brightness(90%);
+  transition: 0.4s;
+}
+
+.map-card iframe:hover {
+  filter: grayscale(0%) brightness(100%);
+}
+
+/* Footer bottom text (if you add later) */
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+  footer {
+    padding: 50px 0 30px;
+  }
+  .footer-content {
+    gap: 30px;
+  }
+}
+/* Hide close button when Kashmir modal is open */
+.modal-overlay.no-close .modal-close {
+    display: none;
+}
+
+
   </style>
 </head>
 <body>
@@ -178,9 +280,10 @@
         <span class="modal-close" onclick="closeModal()">&times;</span>
         <img id="modalImg" src="" class="modal-img">
         <div class="modal-body">
-            <h2 id="modalTitle" style="margin-bottom:15px">Destination Name</h2>
-            <p id="modalDesc" style="color:#555; margin-bottom:25px">Destination details go here...</p>
-            <button class="btn-search" id="modalBtn">Book via WhatsApp</button>
+            <h2 id="modalTitle" style="margin-bottom:5px">Destination Name</h2>
+            <div id="modalDurText" style="color:var(--primary); font-weight:800; margin-bottom:15px"></div>
+            <p id="modalDesc" style="color:#555; margin-bottom:25px"></p>
+            <button class="btn-search" id="modalBtn">Enquire via WhatsApp</button>
         </div>
     </div>
   </div>
@@ -188,7 +291,6 @@
   <header>
     <div class="header-bg"></div>
     <div id="canvas-container"></div>
-
     <nav class="navBar">
       <div class="logo">GANRAJ<span> TOURS</span></div>
       <ul>
@@ -199,13 +301,11 @@
       </ul>
       <div class="nav-toggle" id="navToggle"><i class="fa-solid fa-bars"></i></div>
     </nav>
-
     <div class="header-section">
       <span class="hero-mask"><h1 class="hero-line">Your Journey</h1></span>
       <span class="hero-mask"><h1 class="hero-line">Our Passion</h1></span>
       <h2 class="hero-sub">Premier Travel Solutions Across India & The Globe</h2>
     </div>
-
     <div class="travel-box-wrapper">
       <div class="travel-box">
         <div class="travel-plans">
@@ -220,17 +320,13 @@
               </select>
             </div>
           </div>
-
           <div class="input-group">
             <label>Destination</label>
             <div class="custom-select">
               <i class="fa-solid fa-earth-asia"></i>
-              <select id="destSelect">
-                <!-- Populated by JS -->
-              </select>
+              <select id="destSelect"></select>
             </div>
           </div>
-
           <div class="input-group">
             <label>Travelers</label>
             <div class="custom-select">
@@ -238,7 +334,6 @@
               <input type="number" placeholder="No. of people" id="guestCount" min="1">
             </div>
           </div>
-
           <button class="btn-search" onclick="exploreSelected()">Explore Now</button>
         </div>
       </div>
@@ -248,8 +343,8 @@
   <main class="container">
     <section id="destinations">
       <div class="section-header">
-        <h2>Our Popular Destinations</h2>
-        <p>Click on any destination to view details and itinerary information.</p>
+        <h2>Trending Tour Packages</h2>
+        <p>Expertly curated itineraries for an unforgettable experience.</p>
       </div>
       <div id="toursGrid" class="tours-grid"></div>
     </section>
@@ -259,8 +354,7 @@
         <h2>About Ganraj Tours & Travels</h2>
       </div>
       <div style="background:#fff; padding:40px; border-radius:20px; line-height:2; color:#555">
-        <p>Booking a travel package when it comes to travelling to new parts of the country or the world is a practice that has steadily gained popularity. Today, when it comes to planning a holiday trip, <strong>Ganraj Tours & Travels</strong> has carved a strong niche for itself and is counted among the trusted travel agencies in Mumbai and Pune.</p>
-        <p style="margin-top:20px">At Ganraj Tours & Travels, we understand that travelling today is much more than just visiting a destination. Each of our vacation packages is thoughtfully designed to provide the relaxation and joy you expect from a holiday. Recognized for offering end-to-end travel solutions under one roof, we are dedicated to setting new benchmarks in the travel industry.</p>
+        <p><strong>Ganraj Tours & Travels</strong> is a leading travel agency in Mumbai and Pune. We offer end-to-end travel solutions, from domestic spiritual yatras like Ashtavinayak to luxury international cruises.</p>
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-top:30px">
             <div style="text-align:center"><i class="fa-solid fa-shield-heart" style="font-size:2rem; color:var(--primary)"></i><p>Medical Support for Seniors</p></div>
             <div style="text-align:center"><i class="fa-solid fa-hotel" style="font-size:2rem; color:var(--primary)"></i><p>Verified Premium Stays</p></div>
@@ -273,14 +367,10 @@
       <div class="container">
         <div class="enquiry-grid">
           <div>
-            <h2 style="color:#fff; font-size:3rem">Plan a Group Adventure</h2>
-            <p style="color:#aaa; margin:20px 0">Are you planning a corporate retreat, a large family reunion, or a community trip? We specialize in large group logistics, ensuring everyone travels in comfort.</p>
-            <div class="form-notification">
-              <i class="fa-solid fa-star"></i> EXCLUSIVE FOR GROUP BOOKING (20+ PEOPLE)
-            </div>
+            <h2 style="color:#fff; font-size:3rem">Group Adventures</h2>
+            <p style="color:#aaa; margin:20px 0">Specializing in large group logistics for corporate and community trips.</p>
           </div>
           <div class="enquiry-form">
-            <h3 style="margin-bottom:20px">Enquiry Form</h3>
             <form id="groupForm">
               <input type="text" id="fName" placeholder="Your Name" required>
               <input type="tel" id="fPhone" placeholder="Contact Number" required>
@@ -288,13 +378,10 @@
               <select id="fCount" required>
                 <option value="">No. of People</option>
                 <option value="20">20 People</option>
-                <option value="30">30 People</option>
-                <option value="40">40 People</option>
-                <option value="50">50 People</option>
-                <option value="50+">50+ People</option>
+                <option value="50">50+ People</option>
               </select>
-              <input type="text" id="fDest" placeholder="Looking for destination (Free Text)" required>
-              <button type="submit" class="btn-form">Submit Enquiry</button>
+              <input type="text" id="fDest" placeholder="Destination" required>
+              <button type="submit" class="btn-form">Submit via WhatsApp</button>
             </form>
           </div>
         </div>
@@ -305,197 +392,278 @@
   <footer id="footer">
     <div class="container footer-content">
       <div class="footer-col">
-        <h3 class="logo" style="margin-bottom:15px">GANRAJ<span> TOURS</span></h3>
-        <p style="color:#aaa">Making the world accessible from Pimple Saudagar to the Globe. End-to-end travel solutions with a personal touch.</p>
-        <p style="margin-top:20px"><i class="fa-solid fa-location-dot" style="color:var(--primary)"></i> Pimple Saudagar, Pimpri-Chinchwad, Maharashtra</p>
+        <h3 class="logo">GANRAJ<span> TOURS</span></h3>
+        <p style="color:#aaa">Making the world accessible with a personal touch.</p>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
-        <p><i class="fa-solid fa-phone" style="color:var(--primary)"></i> +91 95297 30330</p>
-        <p><i class="fa-solid fa-envelope" style="color:var(--primary)"></i> enquiry@ganrajtours.com</p>
+        <p>+91 95297 30330</p>
+        <p>enquiry@ganrajtours.com</p>
       </div>
       <div class="footer-col">
-        <h4>Our Location</h4>
+        <h4>Location</h4>
         <div class="map-card">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.365313988602!2d73.79125677519356!3d18.59914448250965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b91d245781bd%3A0x6b6942c755359143!2sPimple%20Saudagar%2C%20Pimpri-Chinchwad%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1701332400000!5m2!1sen!2sin" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.365313988602!2d73.79125677519356!3d18.59914448250965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b91d245781bd%3A0x6b6942c755359143!2sPimple%20Saudagar%2C%20Pimpri-Chinchwad%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1701332400000" width="100%" height="200" style="border:0;" loading="lazy"></iframe>
         </div>
       </div>
     </div>
-    <div style="text-align:center; padding-top:40px; color:#555; border-top:1px solid #222; margin-top:40px">
-      &copy; 2025 Ganraj Tours & Travels. Designed with Passion.
-    </div>
   </footer>
 
-  <div class="wa-wrapper">
+  <div class="wa-wrapper" onclick="smartWhatsApp('Hello! I would like to inquire about a tour.')">
     <div class="wa-ripple"></div>
-    <a href="https://wa.me/919529730330?text=Hello%20Ganraj%20Tours!%20I'm%20interested%20in%20planning%20a%20trip." target="_blank" class="fab-wa">
-      <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <div class="fab-wa"><i class="fa-brands fa-whatsapp"></i></div>
   </div>
 
-  <script>
-    // --- UPDATED DESTINATION DATA ---
-    const destData = {
-      india: ["Maharashtra", "Rajasthan", "Kerala", "Meghalaya", "Gujrat", "Kashmir"],
-      world: ["Sri Lanka", "Bali", "Nepal", "Dubai", "Europe", "Vietnam"],
-      special: [
-        "Ashtavinayak", 
-        "Vaishnodevi", 
-        "Parli Vaijnath, Aundha Nagnath, Mahurgad", 
-        "Dwarkadhish Temple, Somnath Jyotirlinga, Girnar Hills", 
-        "Rann of Kutch", 
-        "Cordelia Cruise"
-      ]
-    };
+ <script>
+const PHONE_NUMBER = "919529730330";
 
-    // --- DATA FOR MODAL (Client Info) ---
-    const destinationDetails = {
-      "Maharashtra": { img: "https://images.unsplash.com/photo-1570160897040-d72b216d8206", desc: "Experience the Sahyadri ranges, Konkan beaches, and the heritage of forts. Our Maharashtra tours cover everything from Mahabaleshwar to Ganpatipule." },
-      "Rajasthan": { img: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da", desc: "The Land of Kings. Explore Jaipur's palaces, Udaipur's lakes, and the golden sands of Jaisalmer with our royal heritage packages." },
-      "Kerala": { img: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944", desc: "God's Own Country. Enjoy the serene backwaters of Alleppey, the tea gardens of Munnar, and authentic Ayurvedic wellness retreats." },
-      "Meghalaya": { img: "https://images.unsplash.com/photo-1500382017468-9049fed747ef", desc: "The Abode of Clouds. Visit the living root bridges, the cleanest village in Asia, and the breathtaking waterfalls of Cherrapunji." },
-      "Gujrat": { img: "https://images.unsplash.com/photo-1590050752117-23a9dbc33613", desc: "Explore the vibrant culture of Gujarat, from the Sabarmati Ashram to the industrial marvels and the majestic Statue of Unity." },
-      "Kashmir": { img: "https://images.unsplash.com/photo-1566833925203-31050803a047", desc: "Paradise on Earth. Experience houseboat stays on Dal Lake, skiing in Gulmarg, and the tulip gardens of Srinagar." },
-      "Sri Lanka": { img: "https://images.unsplash.com/photo-1524230507669-5ff97982bb5e", desc: "Island of Serenity. Discover ancient Buddhist temples, lush tea plantations, and pristine beaches in this tropical gem." },
-      "Bali": { img: "https://images.unsplash.com/photo-1537996194471-e657df975ab4", desc: "The Island of Gods. Perfect for honeymooners and families alike, featuring iconic swings, rice terraces, and sea temples." },
-      "Nepal": { img: "https://images.unsplash.com/photo-1544735716-392fe2489ffa", desc: "The Gateway to Himalayas. Visit Pokhara, Kathmandu, and seek blessings at the Pashupatinath temple." },
-      "Dubai": { img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c", desc: "City of the Future. Enjoy desert safaris, the Burj Khalifa experience, and luxury shopping in the heart of the Middle East." },
-      "Europe": { img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b", desc: "A continent of history. From the canals of Venice to the Eiffel Tower in Paris, our Europe tours cover the best of the west." },
-      "Vietnam": { img: "https://images.unsplash.com/photo-1528127269322-539801943592", desc: "Breathtaking landscapes. Cruise through Ha Long Bay and explore the ancient streets of Hoi An and Ho Chi Minh City." },
-      "Ashtavinayak": { img: "https://images.unsplash.com/photo-1590760410651-69762391696f", desc: "Complete 8 Ganesha temple darshan across Maharashtra. A divine spiritual journey organized with comfort and tradition." },
-      "Vaishnodevi": { img: "https://images.unsplash.com/photo-1626014303757-646c2140a3f8", desc: "Jai Mata Di. We provide end-to-end support for your Vaishnodevi yatra, including Katra stays and helicopter bookings." },
-      "Parli Vaijnath, Aundha Nagnath, Mahurgad": { img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2", desc: "A specialized religious circuit covering three powerful Shakti and Jyotirlinga shrines in Maharashtra." },
-      "Dwarkadhish Temple, Somnath Jyotirlinga, Girnar Hills": { img: "https://images.unsplash.com/photo-1590050752117-23a9dbc33613", desc: "The ultimate Gujarat pilgrimage. Visit Dwarka, Somnath, and take the ropeway to the sacred Girnar hills." },
-      "Rann of Kutch": { img: "https://images.unsplash.com/photo-1599423719058-693358055a4b", desc: "Rann Utsav. Experience the white desert under the full moon, traditional Kutchi music, and vibrant handicrafts." },
-      "Cordelia Cruise": { img: "https://images.unsplash.com/photo-1548574505-5e239809ee19", desc: "Luxury on the high seas. Sail from Mumbai to Goa, Lakshadweep or Kochi on India's premier luxury cruise ship." }
-    };
+// WhatsApp logic
+function smartWhatsApp(message) {
+    const encodedMsg = encodeURIComponent(message);
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    let url = "";
+    if (isMobile) {
+        url = `whatsapp://send?phone=${PHONE_NUMBER}&text=${encodedMsg}`;
+        setTimeout(() => {
+            window.location.href = `https://api.whatsapp.com/send?phone=${PHONE_NUMBER}&text=${encodedMsg}`;
+        }, 500);
+    } else {
+        url = `https://web.whatsapp.com/send?phone=${PHONE_NUMBER}&text=${encodedMsg}`;
+    }
+    window.open(url, '_blank');
+}
 
-    // --- RENDER GRID ---
+// Categories & destinations
+const destData = {
+    india: ["Kashmir", "Kerala", "Rajasthan", "Meghalaya", "Gujrat", "Maharashtra"],
+    world: ["Dubai", "Bali", "Sri Lanka", "Vietnam", "Nepal", "Europe"],
+    special: ["Ashtavinayak", "Vaishnodevi", "Rann of Kutch", "Cordelia Cruise"]
+};
+
+// Destination details (with multiple images where needed)
+const destinationDetails = {
+    "Kashmir": { 
+        dur: "5N/6D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1559151808-22f6d9e199ee?w=1200&q=80", // Dal Lake
+            "https://images.unsplash.com/photo-1607290817803-2f1e3d23f730?w=1200&q=80", // Gulmarg
+            "https://images.unsplash.com/photo-1508900051409-1e986f7ed98c?w=1200&q=80"  // Pahalgam
+        ],
+        desc: "Kashmir, known as the 'Paradise on Earth', is a destination of unparalleled beauty. Explore Dal Lake, Gulmarg, and Pahalgam."
+    },
+    "Kerala": { 
+        dur: "4N/5D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=1200&q=80", // Backwaters
+            "https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62?w=1200&q=80", // Munnar
+            "https://images.unsplash.com/photo-1597898735855-4cb4c0f2d540?w=1200&q=80"  // Alleppey
+        ], 
+        desc: "Houseboats, Munnar tea gardens, and serene backwaters make Kerala a tropical paradise."
+    },
+    "Rajasthan": { 
+        dur: "6N/7D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=1200&q=80", // Jaipur
+            "https://images.unsplash.com/photo-1504788365681-15a0b1b79f77?w=1200&q=80", // Udaipur
+            "https://images.unsplash.com/photo-1571829285471-6215674b7b2e?w=1200&q=80"  // Jaisalmer
+        ], 
+        desc: "Explore the royal palaces of Jaipur, lakes of Udaipur, and the golden sands of Jaisalmer."
+    },
+    "Meghalaya": { 
+        dur: "5N/6D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&q=80", // Living root bridges
+            "https://images.unsplash.com/photo-1585155778259-674f539d12b3?w=1200&q=80", // Waterfalls
+            "https://images.unsplash.com/photo-1588776814543-5d86aa5e8b0f?w=1200&q=80"  // Shillong
+        ], 
+        desc: "Visit the living root bridges, cascading waterfalls, and the scenic town of Shillong."
+    },
+    "Gujrat": { 
+        dur: "4N/5D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1590050752117-23a9dbc33613?w=1200&q=80", // Statue of Unity
+            "https://images.unsplash.com/photo-1556514767-5c7c6fcde02b?w=1200&q=80", // Gir National Park
+            "https://images.unsplash.com/photo-1601924578956-63d24a9c2df3?w=1200&q=80"  // Rann of Kutch
+        ], 
+        desc: "Explore the Statue of Unity, Gir National Park, and cultural heritage in Gujarat."
+    },
+    "Maharashtra": { 
+        dur: "3N/4D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1570160897040-d72b216d8206?w=1200&q=80", // Sahyadri
+            "https://images.unsplash.com/photo-1565808322358-5e4ee5d1f5b3?w=1200&q=80", // Konkan beach
+            "https://images.unsplash.com/photo-1549887534-d22d10ab5d5b?w=1200&q=80"  // Mumbai skyline
+        ], 
+        desc: "Discover Konkan beaches, Sahyadri ranges, and the vibrant city of Mumbai."
+    },
+    "Dubai": { 
+        dur: "4N/5D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80", // Burj Khalifa
+            "https://images.unsplash.com/photo-1563298723-dcfebaa392e3?w=1200&q=80", // Desert Safari
+            "https://images.unsplash.com/photo-1508057198894-247b23fe5ade?w=1200&q=80"  // Marina
+        ], 
+        desc: "Experience the luxury of Burj Khalifa, desert safaris, and Dubai Marina."
+    },
+    "Bali": { 
+        dur: "5N/6D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=80", // Beach
+            "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=1200&q=80", // Ubud temples
+            "https://images.unsplash.com/photo-1549887534-95f6c7e3b2f8?w=1200&q=80"  // Rice terraces
+        ], 
+        desc: "Relax on tropical beaches, visit Ubud temples, and explore rice terraces."
+    },
+    "Sri Lanka": { 
+        dur: "5N/6D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1524230507669-5ff97982bb5e?w=1200&q=80", // Train
+            "https://images.unsplash.com/photo-1520523839891-1f1e1fbb6a3f?w=1200&q=80", // Temple
+            "https://images.unsplash.com/photo-1532771931461-34e2649a1f2b?w=1200&q=80"  // Beach
+        ], 
+        desc: "Scenic train rides, ancient temples, and pristine beaches."
+    },
+    "Vietnam": { 
+        dur: "6N/7D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1528127269322-539801943592?w=1200&q=80", // Ha Long Bay
+            "https://images.unsplash.com/photo-1549887534-5b2f96ed4f33?w=1200&q=80", // Hoi An
+            "https://images.unsplash.com/photo-1519222970733-f546218fa6d7?w=1200&q=80"  // Hanoi
+        ], 
+        desc: "Cruise Ha Long Bay, explore historic Hoi An, and experience Hanoi's culture."
+    },
+    "Nepal": { 
+        dur: "4N/5D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=1200&q=80", // Kathmandu
+            "https://images.unsplash.com/photo-1576671085726-ef2de4c0f2c8?w=1200&q=80", // Pokhara
+            "https://images.unsplash.com/photo-1520848315518-8e95dc69f22e?w=1200&q=80"  // Annapurna
+        ], 
+        desc: "Visit Kathmandu's temples, enjoy Pokhara's lakes, and trek the Annapurna region."
+    },
+    "Europe": { 
+        dur: "10N/11D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200&q=80", // Switzerland
+            "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80", // Paris
+            "https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?w=1200&q=80"  // Italy
+        ], 
+        desc: "Experience Switzerland's Alps, Parisian charm, and Italian art and cuisine."
+    },
+    "Ashtavinayak": { 
+        dur: "2N/3D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1590760410651-69762391696f?w=1200&q=80" // Temples
+        ], 
+        desc: "Embark on a spiritual journey visiting the 8 sacred Ganesha temples."
+    },
+    "Vaishnodevi": { 
+        dur: "3N/4D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1626014303757-646c2140a3f8?w=1200&q=80" // Pilgrimage
+        ], 
+        desc: "Holy pilgrimage to Vaishnodevi with comfortable arrangements."
+    },
+    "Rann of Kutch": { 
+        dur: "3N/4D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1599423719058-693358055a4b?w=1200&q=80" // White desert
+        ], 
+        desc: "Experience the White Desert and vibrant Rann Utsav festival."
+    },
+    "Cordelia Cruise": { 
+        dur: "2N/3D", 
+        imgs: [
+            "https://images.unsplash.com/photo-1548574505-5e239809ee19?w=1200&q=80" // Cruise
+        ], 
+        desc: "Luxury travel on India's premier cruise ship."
+    }
+};
+
+
+
+// Render trending tours grid
+function renderTrending() {
     const grid = document.getElementById('toursGrid');
-    function renderTrending() {
-        grid.innerHTML = "";
-        const allCities = [...destData.india, ...destData.world, ...destData.special];
-        // Take a selection for the trending grid
-        allCities.slice(0, 12).forEach(name => {
-            const info = destinationDetails[name] || { img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828", desc: "Incredible Journey awaits." };
-            grid.innerHTML += `
-                <div class="tour-card" onclick="openModal('${name}')">
-                  <div class="badge-special">${destData.india.includes(name) ? 'India' : (destData.world.includes(name) ? 'World' : 'Special')}</div>
-                  <div class="tour-card-img"><img src="${info.img}?auto=format&fit=crop&w=600&q=80"></div>
-                  <div class="tour-card-body"><h3>${name}</h3><p>${info.desc.substring(0, 60)}...</p></div>
+    grid.innerHTML = "";
+    const allCities = [...destData.india, ...destData.world, ...destData.special];
+    allCities.forEach(name => {
+        const info = destinationDetails[name];
+        grid.innerHTML += `
+            <div class="tour-card" onclick="openModal('${name}')">
+              <div class="badge-special">${destData.india.includes(name) ? 'India' : destData.world.includes(name) ? 'World' : 'Special'}</div>
+              <div class="tour-card-img">
+                <img src="${info.imgs[0]}?w=600&q=80" alt="${name}">
+                <div class="duration-badge">${info.dur}</div>
+              </div>
+              <div class="tour-card-body">
+                <h3>${name}</h3>
+                <p style="font-size:0.85rem; color:#666">${info.desc}</p>
+                <div class="tour-icons">
+                    <div class="icon-item"><i class="fa-solid fa-hotel"></i> Hotel</div>
+                    <div class="icon-item"><i class="fa-solid fa-utensils"></i> Meals</div>
+                    <div class="icon-item"><i class="fa-solid fa-car"></i> Cab</div>
                 </div>
-            `;
+              </div>
+            </div>
+        `;
+    });
+}
+
+// Modal for multiple images
+function openModal(cityName) {
+    const info = destinationDetails[cityName];
+    document.getElementById('modalTitle').innerText = cityName;
+    document.getElementById('modalDurText').innerText = "Duration: " + info.dur;
+    document.getElementById('modalDesc').innerHTML = info.desc;
+    document.getElementById('modalImg').src = info.imgs[0] + "?w=800";
+
+    const modalBody = document.querySelector('.modal-body');
+    const existingGallery = document.getElementById('modalGallery');
+    if(existingGallery) existingGallery.remove();
+
+    if(info.imgs.length > 1){
+        const gallery = document.createElement('div');
+        gallery.id = "modalGallery";
+        gallery.style.display = "flex";
+        gallery.style.gap = "10px";
+        gallery.style.marginBottom = "20px";
+        info.imgs.forEach((img, idx) => {
+            const thumb = document.createElement('img');
+            thumb.src = img + "?w=300&q=70";
+            thumb.alt = cityName + " Image " + (idx + 1);
+            thumb.style.height = "80px";
+            thumb.style.cursor = "pointer";
+            thumb.style.borderRadius = "8px";
+            thumb.onclick = () => document.getElementById('modalImg').src = img + "?w=800&q=80";
+            gallery.appendChild(thumb);
         });
+        modalBody.insertBefore(gallery, modalBody.firstChild.nextSibling);
     }
 
-    // --- MODAL LOGIC ---
-    function openModal(cityName) {
-        const info = destinationDetails[cityName];
-        document.getElementById('modalTitle').innerText = cityName;
-        document.getElementById('modalDesc').innerText = info.desc;
-        document.getElementById('modalImg').src = info.img + "?auto=format&fit=crop&w=800&q=80";
-        document.getElementById('infoModal').style.display = 'flex';
-        document.getElementById('modalBtn').onclick = () => bookWa(cityName);
-    }
+    document.getElementById('infoModal').style.display = 'flex';
+    document.getElementById('modalBtn').onclick = () => smartWhatsApp(`I am interested in ${cityName} (${info.dur}) package.`);
+}
 
-    function closeModal() {
-        document.getElementById('infoModal').style.display = 'none';
-    }
+// Dropdown & exploration
+function updateDestDropdown() {
+    const cat = document.getElementById('catSelect').value;
+    const dSelect = document.getElementById('destSelect');
+    dSelect.innerHTML = destData[cat].map(d => `<option value="${d}">${d}</option>`).join('');
+}
+function exploreSelected() { openModal(document.getElementById('destSelect').value); }
+function closeModal() { document.getElementById('infoModal').style.display = 'none'; }
 
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('infoModal')) closeModal();
-    }
+document.getElementById('groupForm').onsubmit = function(e) {
+    e.preventDefault();
+    const msg = `*Group Enquiry*%0A*Name:* ${document.getElementById('fName').value}%0A*Dest:* ${document.getElementById('fDest').value}`;
+    smartWhatsApp(msg);
+};
 
-    // --- INITIALIZE DROPDOWNS ---
-    function updateDestDropdown() {
-      const cat = document.getElementById('catSelect').value;
-      const dSelect = document.getElementById('destSelect');
-      dSelect.innerHTML = destData[cat].map(d => `<option value="${d}">${d}</option>`).join('');
-    }
+// Initialize
+updateDestDropdown();
+renderTrending();
+</script>
 
-    function exploreSelected() {
-        const city = document.getElementById('destSelect').value;
-        openModal(city);
-    }
-
-    // --- FORM HANDLING ---
-    document.getElementById('groupForm').onsubmit = function(e) {
-        e.preventDefault();
-        const name = document.getElementById('fName').value;
-        const phone = document.getElementById('fPhone').value;
-        const city = document.getElementById('fCity').value;
-        const count = document.getElementById('fCount').value;
-        const dest = document.getElementById('fDest').value;
-
-        const msg = `*New Group Enquiry (20+)*%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*City:* ${city}%0A*Group Size:* ${count}%0A*Destination:* ${dest}`;
-        window.open(`https://wa.me/919529730330?text=${msg}`, '_blank');
-    };
-
-    function bookWa(dest) {
-        window.open(`https://wa.me/919529730330?text=Hello, I am interested in the ${dest} tour package. Please provide more details and a quote.`, '_blank');
-    }
-
-    // --- ANIMATIONS ---
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.from(".hero-line", { y: 100, duration: 1.2, stagger: 0.2, ease: "power4.out" });
-
-    // Three.js Logic (Simple Network Background)
-    (function initThree(){
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        container.appendChild(renderer.domElement);
-        const geometry = new THREE.BufferGeometry();
-        const vertices = [];
-        for (let i = 0; i < 300; i++) {
-            vertices.push(THREE.MathUtils.randFloatSpread(100), THREE.MathUtils.randFloatSpread(100), THREE.MathUtils.randFloatSpread(100));
-        }
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-        const particles = new THREE.Points(geometry, new THREE.PointsMaterial({ color: 0xF8C308, size: 0.5 }));
-        scene.add(particles);
-        camera.position.z = 50;
-        function animate() {
-            requestAnimationFrame(animate);
-            particles.rotation.y += 0.001;
-            renderer.render(scene, camera);
-        }
-        animate();
-    })();
-
-    // Nav Toggle
-    document.getElementById('navToggle').onclick = () => {
-        const ul = document.querySelector('.navBar ul');
-        ul.style.display = ul.style.display === 'flex' ? 'none' : 'flex';
-        ul.style.flexDirection = 'column';
-        ul.style.position = 'absolute';
-        ul.style.top = '70px';
-        ul.style.right = '40px';
-        ul.style.background = '#111';
-        ul.style.padding = '20px';
-        ul.style.borderRadius = '10px';
-    };
-// --- WHATSAPP INQUIRY FORM ---
-    document.getElementById('groupForm').onsubmit = function(e) {
-        e.preventDefault();
-        const name = document.getElementById('fName').value;
-        const phone = document.getElementById('fPhone').value;
-        const city = document.getElementById('fCity').value;
-        const count = document.getElementById('fCount').value;
-        const dest = document.getElementById('fDest').value;
-
-        // Creating the message for WhatsApp
-        const waMessage = `*New Group Enquiry*%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*City:* ${city}%0A*Group Size:* ${count}%0A*Destination:* ${dest}`;
-        
-        // Sending to the registered number 919529730330
-        window.open(`https://wa.me/919529730330?text=${waMessage}`, '_blank');
-    };
-
-
-    // Run On Load
-    updateDestDropdown();
-    renderTrending();
-  </script>
 </body>
 </html>
