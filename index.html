@@ -495,6 +495,58 @@ main {
   }
 }
 
+/* ================= MOBILE NAV FIX ================= */
+@media (max-width: 900px) {
+
+  .navBar {
+    padding: 18px 24px;
+  }
+
+  .navBar ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #0b0f19;
+    flex-direction: column;
+    gap: 0;
+    padding: 20px 0;
+    display: none;
+    z-index: 999;
+  }
+
+  .navBar ul li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navBar ul li a {
+    display: block;
+    padding: 14px 0;
+    font-size: 0.9rem;
+  }
+
+  .navBar ul.show {
+    display: flex;
+    animation: slideDown 0.3s ease;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+}
+
+/* Slide animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
   </style>
 </head>
@@ -886,6 +938,20 @@ function renderTrending() {
         `;
     });
 }
+// ================= MOBILE NAV TOGGLE =================
+const navToggle = document.getElementById("navToggle");
+const navMenu = document.querySelector(".navBar ul");
+
+navToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("show");
+});
+
+/* Auto close menu when clicking link */
+document.querySelectorAll(".navBar ul a").forEach(link => {
+  link.addEventListener("click", () => {
+    navMenu.classList.remove("show");
+  });
+});
 
 
 // Modal for multiple images
